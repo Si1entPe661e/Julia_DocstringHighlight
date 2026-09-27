@@ -8,7 +8,8 @@
 #
 # Known cases the parser does not report but the detector decorates on purpose are annotated in the
 # fixtures' expected.json files: `@doc str ->` newline `target` (one argument for the parser, expanded
-# by the docsystem), struct field docstrings (collected by the docsystem), and the deviations of 03 §9.
+# by the docsystem) and the deviations of 03 §9. Struct field docstrings are neither reported by the
+# parser nor decorated.
 
 function macroname(m)
     m isa GlobalRef && return string(m.name)

@@ -13,7 +13,7 @@ export interface ExpectedDocstring {
   prefix: string | null;
   targetLine: number;
   /** Why the Julia parser oracle does not report this docstring (06 §5). */
-  oracle?: 'arrow-form' | 'struct-field' | 'deviation';
+  oracle?: 'arrow-form' | 'deviation';
 }
 
 export interface Expected {

@@ -15,8 +15,6 @@
     {"start":40,"end":40,"kind":"plain","quote":"triple","prefix":null,"targetLine":41},
     {"start":43,"end":43,"kind":"plain","quote":"triple","prefix":null,"targetLine":44},
     {"start":48,"end":48,"kind":"plain","quote":"triple","prefix":null,"targetLine":49},
-    {"start":50,"end":50,"kind":"plain","quote":"single","prefix":null,"targetLine":51,"oracle":"struct-field"},
-    {"start":52,"end":54,"kind":"plain","quote":"triple","prefix":null,"targetLine":55,"oracle":"struct-field"},
     {"start":58,"end":58,"kind":"plain","quote":"triple","prefix":null,"targetLine":59},
     {"start":62,"end":62,"kind":"plain","quote":"triple","prefix":null,"targetLine":63},
     {"start":65,"end":65,"kind":"plain","quote":"triple","prefix":null,"targetLine":66},

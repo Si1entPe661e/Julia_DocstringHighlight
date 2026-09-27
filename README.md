@@ -19,8 +19,9 @@ Subtle, theme-native highlighting for Julia docstrings in VS Code: a light docum
 The same strings Julia attaches as documentation:
 
 - a string literal (`"…"` or `"""…"""`) that is a statement of its own and is followed, on the same line or after exactly one line break, by the documented expression — at the top level, in `module` / `baremodule`, `begin` and `quote` blocks;
-- `@doc str target`, `@doc str` + line break + `target`, `@doc raw"""…"""`, `@doc str ->` + line break + `target`, `Base.@doc` / `Core.@doc`, and `@doc(str, target)`;
-- field docstrings inside a `struct`.
+- `@doc str target`, `@doc str` + line break + `target`, `@doc raw"""…"""`, `@doc str ->` + line break + `target`, `Base.@doc` / `Core.@doc`, and `@doc(str, target)`.
+
+Strings inside function bodies and `if` / `for` / `while` / `let` / `try` / `do` blocks are not decorated, since Julia does not treat them as docstrings. Neither are the strings before the fields of a `struct`: they are left as plain strings, while the struct's own docstring gets its region.
 
 ## Requirements
 
@@ -79,7 +80,7 @@ A docstring is a string, and every theme colors strings, so prose inside docstri
 3. The guide is drawn at the left edge of the text area and does not follow indentation; on indented lines it coincides with the first indentation guide.
 4. A docstring that you are still typing gets its background once you type the first character of the expression it documents. While a `"""` is unclosed, it pairs with the next `"""` in the file, exactly as Julia and the syntax highlighter see it.
 5. The inner highlighting cannot be switched off on its own (see [Settings](#settings)).
-6. String statements inside function bodies and `if` / `for` / `let` / `try` / `do` blocks that are followed by another statement are decorated, although Julia does not treat them as docstrings. Such strings are practically non-existent in real code; a string that ends a function body (followed by `end`) is not affected.
+6. Blocks are recognized by indentation while their `end` is still missing, so that the docstrings below a function or struct you are typing keep their region. As a consequence, a string statement in a function or `if` / `for` body that is *not indented* (level with the block's first line) is decorated, although Julia does not treat it as a docstring. Indented code, as written by every Julia formatter, is not affected.
 
 ## How it works
 

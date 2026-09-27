@@ -1,10 +1,11 @@
 // Docstring detection on top of the lexer (03 §3).
 //
 // A string literal is a docstring when it forms a statement of its own (bracket depth 0, after the
-// start of the file, a `;`, or a newline that follows a complete expression) and is followed on the
-// same line, or after exactly one newline, by a token that does not close a block. `@doc` forms
-// accept any string literal (including `raw"…"`) and the `@doc str ->` newline `target` form.
-// Block kinds are not tracked (ADR-009); see 03 §9 for the known deviations.
+// start of the file, a `;`, or a newline that follows a complete expression) in a block where Julia
+// parses docstrings, and is followed on the same line, or after exactly one newline, by a token that
+// does not close a block. `@doc` forms accept any string literal (including `raw"…"`) and the
+// `@doc str ->` newline `target` form. Blocks are tracked by their keywords and `end` (ADR-011);
+// see 03 §9 for the known deviations.
 
 import { Kw, Lexer, Prefix, prefixOperator, startsOperand, Tok } from './scanner';
 import type { RawDocstring } from './types';
@@ -28,6 +29,18 @@ const enum Chain {
   Dot,
 }
 
+/** A block that is open at the current token. */
+interface OpenBlock {
+  /** Its statements can be docstrings: `module`, `baremodule`, `begin`, `quote`. */
+  docs: boolean;
+  /** Leading whitespace of the line with the block keyword. */
+  indent: number;
+}
+
+const CH_TAB = 0x09;
+const CH_LF = 0x0a;
+const CH_CR = 0x0d;
+const CH_SPACE = 0x20;
 const CH_LPAREN = 0x28;
 
 export function findDocstrings(text: string): RawDocstring[] {
@@ -48,6 +61,8 @@ function runPass(text: string, ignoredOpeners: ReadonlySet<number> | null): Pass
   const lexer = new Lexer(text);
   const docstrings: RawDocstring[] = [];
   const openers: number[] = [];
+  const blocks: OpenBlock[] = [];
+  const lines = new LineStarts(text);
   let prev = Prev.BOF;
   let newline = false;
   let stmtStart = 0;
@@ -77,7 +92,7 @@ function runPass(text: string, ignoredOpeners: ReadonlySet<number> | null): Pass
         if (depth === 0 && lexer.terminated) {
           if (atDocStart >= 0) {
             addCandidate(docstrings, text, lexer, 'atdoc', atDocStart);
-          } else if (atStatementStart && lexer.prefixStart < 0) {
+          } else if (atStatementStart && lexer.prefixStart < 0 && inDocstringBlock(blocks, lines, lexer.start)) {
             addCandidate(docstrings, text, lexer, 'plain', lexer.start);
           }
         }
@@ -92,6 +107,7 @@ function runPass(text: string, ignoredOpeners: ReadonlySet<number> | null): Pass
         next = Prev.ENDER;
         break;
       case Tok.IDENT:
+        if (depth === 0) trackBlock(blocks, lines, lexer);
         next = classifyIdent(lexer.kw);
         break;
       case Tok.OPEN:
@@ -144,6 +160,90 @@ function classifyIdent(kw: Kw): Prev {
       return Prev.SEMI;
     default:
       return Prev.CONT;
+  }
+}
+
+/**
+ * Follows block keywords and `end` at bracket depth 0. Inside brackets `end` is an index and `for` /
+ * `if` belong to comprehensions; a block written inside brackets opens and closes there, so it is
+ * skipped as a whole.
+ */
+function trackBlock(blocks: OpenBlock[], lines: LineStarts, lexer: Lexer): void {
+  switch (lexer.kw) {
+    case Kw.Module:
+    case Kw.Baremodule:
+    case Kw.Begin:
+    case Kw.Quote:
+      blocks.push({ docs: true, indent: lines.indent(lexer.start) });
+      break;
+    case Kw.Struct:
+    case Kw.Type: // `abstract type`, `primitive type`
+    case Kw.Function:
+    case Kw.Macro:
+    case Kw.If:
+    case Kw.For:
+    case Kw.While:
+    case Kw.Let:
+    case Kw.Try:
+    case Kw.Do:
+      blocks.push({ docs: false, indent: lines.indent(lexer.start) });
+      break;
+    case Kw.End:
+      blocks.pop();
+      break;
+  }
+}
+
+/**
+ * Whether a string statement at `pos` stands where Julia parses docstrings: at the top level or
+ * directly in `module`, `baremodule`, `begin` or `quote` (03 §2.1), so not in a function, `if` or
+ * loop body. Strings in `struct` bodies are not decorated either, although the docsystem collects
+ * them as field docs when the struct itself is documented (03 §2.8).
+ *
+ * A block contains the string only when the string is indented deeper than the block's first line.
+ * A block whose `end` is still missing while typing would otherwise take in all the code below it
+ * (and the `end` of an enclosing block, shifting the rest): with this rule the code at the block's
+ * own indentation is outside it.
+ */
+function inDocstringBlock(blocks: readonly OpenBlock[], lines: LineStarts, pos: number): boolean {
+  const column = pos - lines.of(pos);
+  for (let i = blocks.length - 1; i >= 0; i--) {
+    const block = blocks[i];
+    if (block !== undefined && column > block.indent) return block.docs;
+  }
+  return true;
+}
+
+/** Line starts for non-decreasing offsets: a pass looks at each character at most once. */
+class LineStarts {
+  private last = 0;
+  private start = 0;
+
+  constructor(private readonly text: string) {}
+
+  /** Offset of the start of the line containing `pos`. */
+  of(pos: number): number {
+    for (let i = pos; i > this.last; i--) {
+      const c = this.text.charCodeAt(i - 1);
+      if (c === CH_LF || c === CH_CR) {
+        this.start = i;
+        break;
+      }
+    }
+    this.last = pos;
+    return this.start;
+  }
+
+  /** Length of the leading whitespace of the line containing `pos`. */
+  indent(pos: number): number {
+    const start = this.of(pos);
+    let i = start;
+    while (i < pos) {
+      const c = this.text.charCodeAt(i);
+      if (c !== CH_SPACE && c !== CH_TAB) break;
+      i++;
+    }
+    return i - start;
   }
 }
 

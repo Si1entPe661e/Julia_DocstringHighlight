@@ -96,6 +96,8 @@ const shapes = [
   ['stress: unmatched backtick runs on every line', 40, (n) => ['"""', ...Array(n).fill('a `` b ``` c ```` d ````` e ` f'), '"""', 'f(x) = x']],
   // One line of 40n characters holding runs of about 2√(20n) different lengths, none of them matched.
   ['stress: one line of unmatched backtick runs', 40, (n) => ['"""', runsOfEveryLength(40 * n), '"""', 'f(x) = x']],
+  // Block keywords on one long line: finding the indentation of each must not rescan the line.
+  ['stress: one line of begin … end blocks', 40, (n) => ['begin; y = 1; end; '.repeat(2 * n), '"""Docs."""', 'f(x) = x']],
 ];
 
 function runsOfEveryLength(chars) {

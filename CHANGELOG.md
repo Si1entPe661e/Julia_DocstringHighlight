@@ -5,6 +5,13 @@ All notable changes to this extension are documented here. The format follows
 
 ## [0.1.1] - 2026-09-26
 
+### Changed
+
+- Strings before the fields of a `struct` no longer get a docstring region.
+- String statements in function bodies and `if` / `for` / `while` / `let` / `try` / `do` / `macro` blocks no
+  longer get a docstring region either: Julia does not treat them as docstrings. While a block's `end` is not
+  typed yet, the docstrings below it keep their region.
+
 ### Fixed
 
 - Markdown highlighting no longer runs past a docstring whose closing quotes follow an even number of

@@ -50,21 +50,45 @@ end
 
 function outer()
     """
-    Deviation: a string statement inside a function body.
+    Not a docstring: a string statement inside a function body.
     """
     inner(x) = x
 end
 
 if true
     """
-    Deviation: inside an if block.
+    Not a docstring: inside an if block.
     """
     in_if(x) = x
 end
 
 for i in 1:2
     """
-    Deviation: inside a for loop.
+    Not a docstring: inside a for loop.
     """
     in_for(x) = x
+end
+
+let
+    y = 1
+    """
+    Not a docstring: inside a let block.
+    """
+    in_let(x) = x
+end
+
+function with_begin()
+    begin
+        """
+        Inside begin inside a function: a docstring again.
+        """
+        in_nested_begin(x) = x
+    end
+end
+
+function unindented()
+"""
+Deviation: an unindented function body looks like the code after a function whose `end` is not typed yet.
+"""
+in_unindented(x) = x
 end

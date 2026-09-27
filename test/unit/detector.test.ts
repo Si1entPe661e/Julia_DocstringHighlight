@@ -48,7 +48,6 @@ describe('detector: true positives (06 §2.2)', () => {
     ['13c. begin, indented', `begin\n    ${Q}\n    docs\n    ${Q}\n    f(x) = x\nend\n`, [[1, 3, 4]]],
     ['13d. quote', `quote\n    ${Q}docs${Q}\n    f(x) = x\nend\n`, [[1, 1, 2]]],
     ['13e. @testset begin', `@testset "t" begin\n    ${Q}docs${Q}\n    f(x) = x\nend\n`, [[1, 1, 2]]],
-    ['14. struct field', `struct S\n    "docs"\n    x::Int\nend\n`, [[1, 1, 2]]],
     ['15a. file starts with the docstring', `${Q}\ndocs\n${Q}\nf(x) = x\n`, [[0, 2, 3]]],
     ['15b. target is the last line, no trailing newline', `${Q}docs${Q}\nfoo(x) = x`, [[0, 0, 1]]],
     ['16. CRLF', `${Q}\r\ndocs\r\n${Q}\r\nfoo(x) = x\r\n`, [[0, 2, 3]]],
@@ -110,13 +109,60 @@ describe('detector: false positives (06 §2.3)', () => {
     ['18. escaped quotes inside a string', 's = "\\"\\"\\"\\nfoo(x)\\n\\"\\"\\""\nfoo(x) = x\n', []],
     ['19a. Markdown in a command', 'c = `echo # Arguments`\nfoo(x) = x\n', []],
     ['19b. Markdown in a string', 't = "```julia\\n# Heading\\n```"\nfoo(x) = x\n', []],
+    ['21. struct field strings', `struct S\n    "docs"\n    x::Int\nend\n`, []],
   ]);
 });
 
 describe('detector: known deviations from the parser (06 §2.4, 03 §9)', () => {
+  // An unindented block body cannot be told from the code after a block whose `end` is not typed yet.
   cases([
-    ['1. deviation: function body', `function outer()\n${Q}docs${Q}\ninner(x) = x\nend\n`, [[1, 1, 2]]],
-    ['2. deviation: if body', `if cond\n${Q}docs${Q}\nf(x) = x\nend\n`, [[1, 1, 2]]],
+    ['1. deviation: unindented function body', `function outer()\n${Q}docs${Q}\ninner(x) = x\nend\n`, [[1, 1, 2]]],
+    ['2. deviation: unindented if body', `if cond\n${Q}docs${Q}\nf(x) = x\nend\n`, [[1, 1, 2]]],
+  ]);
+});
+
+describe('detector: block context (verified against the Julia 1.13 parser)', () => {
+  cases([
+    ['a function body is not a docstring block', `function outer()\n    ${Q}docs${Q}\n    inner(x) = x\nend\n`, []],
+    [
+      'if, @static if, for and while bodies',
+      `if c\n    ${Q}d${Q}\n    f(x) = x\nend\n@static if c\n    ${Q}d${Q}\n    g(x) = x\nend\nfor i in 1:2\n    ${Q}d${Q}\n    h(x) = x\nend\nwhile false\n    ${Q}d${Q}\n    k(x) = x\nend\n`,
+      [],
+    ],
+    [
+      'let, try, do and macro bodies',
+      `let\n    y = 1\n    ${Q}d${Q}\n    f(x) = x\nend\ntry\n    ${Q}d${Q}\n    g(x) = x\ncatch\nend\nmap(xs) do x\n    y = x\n    ${Q}d${Q}\n    x\nend\nmacro m()\n    ${Q}d${Q}\n    h(x) = x\nend\n`,
+      [],
+    ],
+    [
+      'begin and quote inside a function are docstring blocks again',
+      `function g()\n    begin\n        ${Q}doc${Q}\n        f(x) = x\n    end\n    quote\n        ${Q}doc${Q}\n        h(x) = x\n    end\nend\n`,
+      [[2, 2, 3], [6, 6, 7]],
+    ],
+    ['a docstring after the end of a block', `function f()\n    x = 1\nend\n${Q}doc${Q}\ng(x) = x\n`, [[3, 3, 4]]],
+    ['@doc in a function body is still a docstring', `function outer()\n    @doc "doc" f\nend\n`, [[1, 1, 1]]],
+    ['`end` inside brackets is an index', `function f(v)\n    v[end]\n    ${Q}not doc${Q}\n    g(x) = x\nend\n`, []],
+    ['`for` and `if` in a comprehension have no `end`', `xs = [x for x in 1:3 if x > 1]\n${Q}doc${Q}\nf(x) = x\n`, [[1, 1, 2]]],
+    ['a block inside brackets', `y = (begin; 1; end)\n${Q}doc${Q}\nf(x) = x\n`, [[1, 1, 2]]],
+    ['abstract and primitive types end with `end`', `abstract type A end\nprimitive type P 8 end\n${Q}doc${Q}\nf(x) = x\n`, [[2, 2, 3]]],
+  ]);
+});
+
+describe('detector: struct bodies (field strings are not decorated)', () => {
+  cases([
+    [
+      'the struct docstring is decorated, its field strings are not',
+      `${Q}Model docs${Q}\nstruct Model\n    "Parameter vector."\n    θ::Vector{Float64}\n    "Label."\n    name::String\nend\n`,
+      [[0, 0, 1]],
+    ],
+    ['mutable struct and Base.@kwdef struct', `mutable struct M\n    "f"\n    x::Int\nend\nBase.@kwdef struct K\n    "f"\n    a::Int = 1\nend\n`, []],
+    [
+      'an inner constructor does not end the struct',
+      `struct S\n    x::Int\n    function S()\n        new(0)\n    end\n    "field"\n    y::Int\nend\n${Q}doc${Q}\nf(x) = x\n`,
+      [[8, 8, 9]],
+    ],
+    ['`end` in an index inside the struct', `struct S\n    v::Vector{Int}\n    S() = new([1, 2][end:end])\n    "field"\n    w::Int\nend\n`, []],
+    ['a one-line struct', `struct S; "field"; x::Int; end\n`, []],
   ]);
 });
 
@@ -210,6 +256,15 @@ describe('detector: incomplete input while typing (03 §6)', () => {
   });
   it('balanced brackets after an unclosed one keep their pairing', () => {
     const src = `foo(a\nbar(\n${Q}not doc${Q}\n)\n${Q}doc${Q}\nf(x) = x\n`;
+    assert.deepEqual(regions(src), [[4, 4, 5]]);
+  });
+  it('a struct without its `end` yet: the fields are not decorated, the docstrings below it are', () => {
+    const src = `struct S\n    "field"\n    x::Int\n\n${Q}doc${Q}\nf(x) = x\n`;
+    assert.deepEqual(regions(src), [[4, 4, 5]]);
+  });
+  it('a function without its `end` yet does not take in the rest of the module', () => {
+    // The module's `end` closes the function instead; the docstring below is at the function's own indentation.
+    const src = `module M\nfunction b()\n    x = 1\n\n${Q}doc${Q}\nc() = 1\nend\n`;
     assert.deepEqual(regions(src), [[4, 4, 5]]);
   });
 });
