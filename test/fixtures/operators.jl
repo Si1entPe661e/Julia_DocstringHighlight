@@ -32,3 +32,14 @@ Base.@doc "Complements the cents." ~(a::Money) = Money(~a.cents)
 @doc "not a docstring" *(a::Money) = a
 
 "not a docstring" +(a::Money) = a
+
+# An operator where an operand is expected, with nothing after it on the line, is a value: the
+# statement is complete, and the next line can hold a docstring.
+
+import Base: *, ^
+"""The product of an amount and a number."""
+*
+
+const ≤ = <=
+"""Compares two amounts."""
+compare(a::Money, b::Money) = a.cents ≤ b.cents

@@ -5,7 +5,9 @@
     {"start":16,"end":16,"kind":"atdoc","quote":"single","prefix":"raw","targetLine":16},
     {"start":18,"end":18,"kind":"atdoc","quote":"single","prefix":null,"targetLine":18},
     {"start":20,"end":20,"kind":"plain","quote":"single","prefix":null,"targetLine":20},
-    {"start":22,"end":22,"kind":"plain","quote":"triple","prefix":null,"targetLine":22}
+    {"start":22,"end":22,"kind":"plain","quote":"triple","prefix":null,"targetLine":22},
+    {"start":39,"end":39,"kind":"plain","quote":"triple","prefix":null,"targetLine":40},
+    {"start":43,"end":43,"kind":"plain","quote":"triple","prefix":null,"targetLine":44}
   ],
   "inlineCode": []
 }

@@ -20,6 +20,9 @@ All notable changes to this extension are documented here. The format follows
   line. On an Apple Silicon laptop, a 50,000-line docstring took about 1.5 s to scan and now takes about 15 ms.
 - A docstring right after a statement that ends in a number with a trailing dot (`x = 1.`) is detected.
 - Docstrings of operator methods are detected: `@doc "…" +(a::T, b::T) = …` and `"…" !(a::T) = …`.
+- A docstring is detected after a line that ends in an operator used as a value, such as an operator
+  documented on its own (`==`), an import or export list (`import Base: ^`) or an assignment
+  (`const ≤ = <=`), and after a line that ends in a splat (`attributes...` in a Makie recipe).
 
 ## [0.1.0] - 2026-09-26
 

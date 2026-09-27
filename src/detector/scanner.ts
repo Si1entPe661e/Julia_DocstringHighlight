@@ -484,7 +484,7 @@ function numberEnd(text: string, i: number): number {
 }
 
 // ---------------------------------------------------------------------------------------------
-// Prefix operators
+// Operators
 
 export const enum Prefix {
   None,
@@ -521,6 +521,38 @@ export function prefixOperator(text: string, start: number, end: number): Prefix
     default:
       return Prefix.None;
   }
+}
+
+/**
+ * Whether the run of operator characters [start, end) can stand alone as a value, as in `x = +` or
+ * `==` on a line of its own. Not `::`, which takes its operand from the next line, nor `:`, `'`,
+ * `@` or a trailing `.` (`...`), which are errors on their own.
+ */
+export function operatorStandsAlone(text: string, start: number, end: number): boolean {
+  const last = text.charCodeAt(end - 1);
+  if (last === CH_DOT || last === CH_APOS || last === CH_AT) return false;
+  if (last === CH_COLON) return end - start > 1 && text.charCodeAt(end - 2) !== CH_COLON;
+  return true;
+}
+
+/** Whether the `=` at `i` is an assignment, not part of `==` or `=>`. */
+export function isAssignmentAt(text: string, i: number): boolean {
+  const next = text.charCodeAt(i + 1);
+  return text.charCodeAt(i) === CH_EQ && next !== CH_EQ && next !== CH_GT;
+}
+
+/**
+ * Whether the identifier [start, end) is the `public` keyword of a statement that lists names,
+ * like `export`: separated from what follows, which is not `(`, `[` or `=` (JuliaSyntax's
+ * `parse_public`; before Julia 1.11 `public` was an ordinary identifier).
+ */
+export function isPublicKeyword(text: string, start: number, end: number): boolean {
+  if (end - start !== 6 || !text.startsWith('public', start)) return false;
+  let i = end;
+  while (text.charCodeAt(i) === CH_SPACE || text.charCodeAt(i) === CH_TAB) i++;
+  const c = text.charCodeAt(i);
+  if (i === end || Number.isNaN(c) || c === CH_LF || c === CH_CR || c === CH_HASH || c === CH_SEMI) return false;
+  return c !== CH_LPAREN && c !== CH_LBRACKET && !isAssignmentAt(text, i);
 }
 
 /**

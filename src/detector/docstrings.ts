@@ -7,7 +7,17 @@
 // `@doc str ->` newline `target` form. Blocks are tracked by their keywords and `end` (ADR-011);
 // see 03 §9 for the known deviations.
 
-import { Kw, Lexer, Prefix, prefixOperator, startsOperand, Tok } from './scanner';
+import {
+  isAssignmentAt,
+  isPublicKeyword,
+  Kw,
+  Lexer,
+  operatorStandsAlone,
+  Prefix,
+  prefixOperator,
+  startsOperand,
+  Tok,
+} from './scanner';
 import type { RawDocstring } from './types';
 
 /** Category of the previous significant token, for statement-start decisions. */
@@ -68,18 +78,31 @@ function runPass(text: string, ignoredOpeners: ReadonlySet<number> | null): Pass
   let stmtStart = 0;
   let chain = Chain.None;
   let atDocStart = -1;
+  /** Start of the run of operator characters (`==`, `>:`, `.+`) that the last token ends, or -1. */
+  let runStart = -1;
+  /** That run stands where an operand is expected. */
+  let runOperand = false;
+  /** The last token completes the expression if the line ends after it. */
+  let atomAtLineEnd = false;
 
   for (;;) {
     const k = lexer.next();
     if (k === Tok.EOF) break;
     if (k === Tok.NEWLINE) {
+      // An operator where an operand is expected, with nothing after it on the line, is a value of
+      // its own (JuliaSyntax parses `+` followed by a newline as the atom `+`): `==` alone as the
+      // target of a docstring, `import Base: ^`, `const ≤ = <=`. The next line starts a statement.
+      if (atomAtLineEnd) prev = Prev.ENDER;
+      atomAtLineEnd = false;
+      runStart = -1;
       newline = true;
       atDocStart = -1;
       continue;
     }
     const depth = openers.length;
-    const atStatementStart =
+    const atStatementStart: boolean =
       depth === 0 && (prev === Prev.BOF || prev === Prev.SEMI || (newline && prev === Prev.ENDER));
+    const operandExpected: boolean = atStatementStart || prev !== Prev.ENDER;
     if (atStatementStart) {
       stmtStart = lexer.start;
       chain = Chain.Start;
@@ -108,7 +131,10 @@ function runPass(text: string, ignoredOpeners: ReadonlySet<number> | null): Pass
         break;
       case Tok.IDENT:
         if (depth === 0) trackBlock(blocks, lines, lexer);
-        next = classifyIdent(lexer.kw);
+        next =
+          atStatementStart && lexer.kw === Kw.None && isPublicKeyword(text, lexer.start, lexer.end)
+            ? Prev.CONT
+            : classifyIdent(lexer.kw);
         break;
       case Tok.OPEN:
         if (ignoredOpeners === null || !ignoredOpeners.has(lexer.start)) openers.push(lexer.start);
@@ -130,6 +156,29 @@ function runPass(text: string, ignoredOpeners: ReadonlySet<number> | null): Pass
       default:
         // COMMA, DOT, ARROW, COLON, OP
         next = Prev.CONT;
+    }
+
+    if (depth > 0) {
+      // Inside brackets a line break ends nothing.
+      atomAtLineEnd = false;
+      runStart = -1;
+    } else if (k === Tok.OP || k === Tok.COLON || k === Tok.DOT) {
+      if (runStart < 0 || lexer.spaceBefore) {
+        // A new run. After an operator standing alone, `=` assigns to it (`const ≤ = <=`):
+        // JuliaSyntax takes an operator followed by `=` as an atom, so that `=` is binary.
+        runOperand = operandExpected && !(runStart >= 0 && runOperand && isAssignmentAt(text, lexer.start));
+        runStart = lexer.start;
+      }
+      // After a value, the postfix `...` completes it too: `documented_attributes(Lines)...` in a
+      // Makie recipe, followed by the docstring of an attribute.
+      atomAtLineEnd = runOperand
+        ? operatorStandsAlone(text, runStart, lexer.end)
+        : runStart === lexer.start && lexer.end - lexer.start === 3 && text.startsWith('...', lexer.start);
+    } else {
+      // `in`, `isa` and `where` are names where an operand is expected: `in` alone documents `in`.
+      atomAtLineEnd =
+        k === Tok.IDENT && operandExpected && (lexer.kw === Kw.In || lexer.kw === Kw.Isa || lexer.kw === Kw.Where);
+      runStart = -1;
     }
 
     if (k === Tok.IDENT && lexer.kw === Kw.None && (chain === Chain.Start || chain === Chain.Dot)) {
@@ -200,16 +249,18 @@ function trackBlock(blocks: OpenBlock[], lines: LineStarts, lexer: Lexer): void 
  * loop body. Strings in `struct` bodies are not decorated either, although the docsystem collects
  * them as field docs when the struct itself is documented (03 §2.8).
  *
- * A block contains the string only when the string is indented deeper than the block's first line.
- * A block whose `end` is still missing while typing would otherwise take in all the code below it
- * (and the `end` of an enclosing block, shifting the rest): with this rule the code at the block's
- * own indentation is outside it.
+ * A block that does not take docstrings contains the string only when the string is indented deeper
+ * than the block's first line. Such a block whose `end` is still missing while typing would
+ * otherwise take in all the code below it (and the `end` of an enclosing block, shifting the rest):
+ * with this rule the code at the block's own indentation is outside it. Blocks that take docstrings
+ * need no such rule, and their bodies are often not indented (`@eval begin` in a loop).
  */
 function inDocstringBlock(blocks: readonly OpenBlock[], lines: LineStarts, pos: number): boolean {
   const column = pos - lines.of(pos);
   for (let i = blocks.length - 1; i >= 0; i--) {
     const block = blocks[i];
-    if (block !== undefined && column > block.indent) return block.docs;
+    if (block === undefined || block.docs) return true;
+    if (column > block.indent) return false;
   }
   return true;
 }

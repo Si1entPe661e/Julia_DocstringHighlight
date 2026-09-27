@@ -145,6 +145,40 @@ describe('detector: block context (verified against the Julia 1.13 parser)', () 
     ['`for` and `if` in a comprehension have no `end`', `xs = [x for x in 1:3 if x > 1]\n${Q}doc${Q}\nf(x) = x\n`, [[1, 1, 2]]],
     ['a block inside brackets', `y = (begin; 1; end)\n${Q}doc${Q}\nf(x) = x\n`, [[1, 1, 2]]],
     ['abstract and primitive types end with `end`', `abstract type A end\nprimitive type P 8 end\n${Q}doc${Q}\nf(x) = x\n`, [[2, 2, 3]]],
+    [
+      'an unindented `@eval begin` body in a loop still takes docstrings',
+      `for f in (:a, :b)\n    @eval begin\n    ${Q}doc${Q}\n    $f(x) = x\n    end\nend\n`,
+      [[2, 2, 3]],
+    ],
+  ]);
+});
+
+describe('detector: an operator as a value at the end of a line (verified against the Julia 1.13 parser)', () => {
+  cases([
+    ['an operator alone as the target', `${Q}doc${Q}\n==\n${Q}doc2${Q}\nf(x) = x\n`, [[0, 0, 1], [2, 2, 3]]],
+    ['`>:` alone, then a blank line', `${Q}doc${Q}\n>:\n\n${Q}doc2${Q}\nf(x) = x\n`, [[0, 0, 1], [3, 3, 4]]],
+    ['`in` and `isa` alone', `${Q}a${Q}\nin\n${Q}b${Q}\nisa\n${Q}c${Q}\nf(x) = x\n`, [[0, 0, 1], [2, 2, 3], [4, 4, 5]]],
+    [
+      'import, using and export lists ending in an operator',
+      `import Base: copy,\n    hvcat, ^\n${Q}a${Q}\nf(x) = x\nimport Core: >:\n${Q}b${Q}\ng(x) = x\nusing Base: ==\n${Q}c${Q}\nh(x) = x\nexport +, -\n${Q}d${Q}\nk(x) = x\n`,
+      [[2, 2, 3], [5, 5, 6], [8, 8, 9], [11, 11, 12]],
+    ],
+    [
+      'an operator assigned to a name',
+      `const ≤ = <=\n${Q}a${Q}\nf(x) = x\nx = -\n${Q}b${Q}\ng(x) = x\ny = .+ # comment\n${Q}c${Q}\nh(x) = x\n`,
+      [[1, 1, 2], [4, 4, 5], [7, 7, 8]],
+    ],
+    ['a public list (Julia 1.11)', `module M\npublic +\n${Q}doc${Q}\nf(x) = x\nend\n`, [[2, 2, 3]]],
+    ['`public` as a variable', `public = 1\n${Q}doc${Q}\nf(x) = x\n`, [[1, 1, 2]]],
+    [
+      'a splat ends the line (a Makie recipe)',
+      `@recipe Arc (a, b) begin\n    documented_attributes(Lines)...\n    "The number of line points."\n    resolution = 100\nend\n`,
+      [[2, 2, 3]],
+    ],
+    ['a binary operator or keyword after a value continues the expression', `a ==\n${Q}doc${Q}\nf(x) = x\nx isa\n${Q}doc${Q}\ng(x) = x\n`, []],
+    ['a dotted operator after a value, and `..`', `x = a .+\n${Q}doc${Q}\nf(x) = x\n\nr = x..\n${Q}doc${Q}\ng(x) = x\n`, []],
+    ['`=` after an operator standing alone is the assignment', `const ≠ =\n${Q}doc${Q}\nf(x) = x\n`, []],
+    ['`::` takes its operand from the next line', `x = ::\n${Q}doc${Q}\nf(x) = x\n`, []],
   ]);
 });
 
