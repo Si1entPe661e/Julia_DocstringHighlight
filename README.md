@@ -2,9 +2,13 @@
 
 Subtle, theme-native highlighting for Julia docstrings in VS Code: a light documentation region, plus Markdown structure and real Julia syntax inside it. Every color comes from your current theme.
 
+<p align="center">
+  <img src="images/readme/hero.png" width="790" alt="A Julia docstring in the Dark Modern theme with the extension: a light region with a guide on its left edge, Markdown headings, lists and inline code, a Documenter admonition, and a jldoctest example highlighted as Julia">
+</p>
+
 | Before | After |
 | --- | --- |
-| ![Dark Modern, without the extension](images/readme/dark-modern-before.png) | ![Dark Modern, with the extension](images/readme/dark-modern-after.png) |
+| ![Dark Modern, without the extension](images/readme/dark-modern-before.png) | ![Dark Modern, with the extension: the docstring gets its region, while the strings before the struct fields stay plain](images/readme/dark-modern-after.png) |
 | ![Light Modern, without the extension](images/readme/light-modern-before.png) | ![Light Modern, with the extension](images/readme/light-modern-after.png) |
 
 ## What it does
