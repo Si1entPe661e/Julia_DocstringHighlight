@@ -1,0 +1,38 @@
+>"""
+#^^^ source.julia string.docstring.julia punctuation.definition.string.begin.julia
+>- first item
+#^ source.julia string.docstring.julia text.docstring.julia markup.list.unnumbered.markdown punctuation.definition.list.begin.markdown
+# ^ source.julia string.docstring.julia text.docstring.julia markup.list.unnumbered.markdown
+#  ^^^^^^^^^^ source.julia string.docstring.julia text.docstring.julia markup.list.unnumbered.markdown
+>  continued
+#^^ source.julia string.docstring.julia text.docstring.julia markup.list.unnumbered.markdown
+#  ^^^^^^^^^ source.julia string.docstring.julia text.docstring.julia markup.list.unnumbered.markdown
+>- second `item`
+#^ source.julia string.docstring.julia text.docstring.julia markup.list.unnumbered.markdown punctuation.definition.list.begin.markdown
+# ^ source.julia string.docstring.julia text.docstring.julia markup.list.unnumbered.markdown
+#  ^^^^^^^ source.julia string.docstring.julia text.docstring.julia markup.list.unnumbered.markdown
+#         ^ source.julia string.docstring.julia text.docstring.julia markup.list.unnumbered.markdown markup.inline.raw.string.markdown punctuation.definition.raw.markdown
+#          ^^^^ source.julia string.docstring.julia text.docstring.julia markup.list.unnumbered.markdown markup.inline.raw.string.markdown
+#              ^ source.julia string.docstring.julia text.docstring.julia markup.list.unnumbered.markdown markup.inline.raw.string.markdown punctuation.definition.raw.markdown
+>  1. nested
+#^^ source.julia string.docstring.julia text.docstring.julia markup.list.unnumbered.markdown
+#  ^^ source.julia string.docstring.julia text.docstring.julia markup.list.unnumbered.markdown markup.list.numbered.markdown punctuation.definition.list.begin.markdown
+#    ^ source.julia string.docstring.julia text.docstring.julia markup.list.unnumbered.markdown markup.list.numbered.markdown
+#     ^^^^^^ source.julia string.docstring.julia text.docstring.julia markup.list.unnumbered.markdown markup.list.numbered.markdown
+>     more
+#^^^^ source.julia string.docstring.julia text.docstring.julia markup.list.unnumbered.markdown
+#    ^^^^^ source.julia string.docstring.julia text.docstring.julia markup.list.unnumbered.markdown
+>
+>After the list.
+#^^^^^^^^^^^^^^^ source.julia string.docstring.julia text.docstring.julia
+>"""
+#^^^ source.julia string.docstring.julia punctuation.definition.string.end.julia
+>list(x) = x
+#^^^^ source.julia entity.name.function.julia
+#    ^ source.julia meta.bracket.julia
+#     ^ source.julia
+#      ^ source.julia meta.bracket.julia
+#       ^ source.julia
+#        ^ source.julia keyword.operator.update.julia
+#         ^^ source.julia
+>

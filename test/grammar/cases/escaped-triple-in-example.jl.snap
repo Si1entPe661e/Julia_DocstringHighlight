@@ -1,0 +1,29 @@
+>"""
+#^^^ source.julia string.docstring.julia punctuation.definition.string.begin.julia
+>```julia
+#^^^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown punctuation.definition.markdown
+#   ^^^^^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown fenced_code.block.language.markdown
+>s = "\"\"\""
+#^^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown meta.embedded.block.julia
+#  ^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown meta.embedded.block.julia keyword.operator.update.julia
+#   ^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown meta.embedded.block.julia
+#    ^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown meta.embedded.block.julia string.quoted.double.julia punctuation.definition.string.begin.julia
+#     ^^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown meta.embedded.block.julia string.quoted.double.julia constant.character.escape.julia
+#       ^^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown meta.embedded.block.julia string.quoted.double.julia constant.character.escape.julia
+#         ^^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown meta.embedded.block.julia string.quoted.double.julia constant.character.escape.julia
+#           ^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown meta.embedded.block.julia string.quoted.double.julia punctuation.definition.string.end.julia
+>```
+#^^^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown punctuation.definition.markdown
+>tail `code`
+#^^^^^ source.julia string.docstring.julia text.docstring.julia
+#     ^ source.julia string.docstring.julia text.docstring.julia markup.inline.raw.string.markdown punctuation.definition.raw.markdown
+#      ^^^^ source.julia string.docstring.julia text.docstring.julia markup.inline.raw.string.markdown
+#          ^ source.julia string.docstring.julia text.docstring.julia markup.inline.raw.string.markdown punctuation.definition.raw.markdown
+>"""
+#^^^ source.julia string.docstring.julia punctuation.definition.string.end.julia
+>z = 1
+#^^ source.julia
+#  ^ source.julia keyword.operator.update.julia
+#   ^ source.julia
+#    ^ source.julia constant.numeric.julia
+>

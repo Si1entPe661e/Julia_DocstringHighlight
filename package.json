@@ -1,0 +1,158 @@
+{
+  "name": "julia-docstring-highlighter",
+  "displayName": "Julia Docstring Highlighter",
+  "description": "Subtle, theme-native highlighting for Julia docstrings: a light documentation region plus Markdown and Julia syntax inside.",
+  "version": "0.1.1",
+  "publisher": "lizhicheng",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Si1entPe661e/Julia_DocstringHighlight.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Si1entPe661e/Julia_DocstringHighlight/issues"
+  },
+  "homepage": "https://github.com/Si1entPe661e/Julia_DocstringHighlight#readme",
+  "engines": {
+    "vscode": "^1.108.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Themes"
+  ],
+  "keywords": [
+    "julia",
+    "docstring",
+    "documentation",
+    "markdown",
+    "highlighting"
+  ],
+  "activationEvents": [
+    "onLanguage:julia"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "grammars": [
+      {
+        "scopeName": "markdown.julia.docstring",
+        "path": "./syntaxes/julia-docstring.injection.tmLanguage.json",
+        "injectTo": [
+          "source.julia"
+        ],
+        "embeddedLanguages": {
+          "meta.embedded.block.julia": "julia"
+        }
+      }
+    ],
+    "colors": [
+      {
+        "id": "juliaDocstring.background",
+        "description": "Background of Julia docstring regions (whole line). Use a translucent color.",
+        "defaults": {
+          "dark": "#FFFFFF08",
+          "light": "#00000008",
+          "highContrast": "#00000000",
+          "highContrastLight": "#00000000"
+        }
+      },
+      {
+        "id": "juliaDocstring.guide",
+        "description": "1px guide on the left edge of Julia docstring regions.",
+        "defaults": {
+          "dark": "#FFFFFF18",
+          "light": "#00000018",
+          "highContrast": "contrastBorder",
+          "highContrastLight": "contrastBorder"
+        }
+      },
+      {
+        "id": "juliaDocstring.inlineCodeBackground",
+        "description": "Background chip behind inline code (`code`) inside Julia docstrings.",
+        "defaults": {
+          "dark": "#FFFFFF12",
+          "light": "#00000012",
+          "highContrast": "#00000000",
+          "highContrastLight": "#00000000"
+        }
+      }
+    ],
+    "configuration": {
+      "title": "Julia Docstring Highlighter",
+      "properties": {
+        "juliaDocstringHighlight.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable docstring region decorations."
+        },
+        "juliaDocstringHighlight.showBackground": {
+          "type": "boolean",
+          "default": true,
+          "description": "Draw a subtle whole-line background behind docstrings (color: juliaDocstring.background)."
+        },
+        "juliaDocstringHighlight.showGuide": {
+          "type": "boolean",
+          "default": true,
+          "description": "Draw a 1px guide on the left edge of docstrings (color: juliaDocstring.guide)."
+        },
+        "juliaDocstringHighlight.showInlineCodeBackground": {
+          "type": "boolean",
+          "default": true,
+          "description": "Draw a subtle chip behind inline code inside docstrings (color: juliaDocstring.inlineCodeBackground)."
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "juliaDocstringHighlight.debug.getRegions",
+        "title": "Julia Docstring Highlighter: Get Regions (debug)"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "juliaDocstringHighlight.debug.getRegions",
+          "when": "false"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "compile": "npm run check-types && node esbuild.mjs",
+    "watch": "node esbuild.mjs --watch",
+    "check-types": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src test",
+    "compile-tests": "tsc -p tsconfig.test.json",
+    "test:unit": "npm run compile-tests && mocha \"out/test/unit/**/*.test.js\"",
+    "test:grammar": "npm run compile-tests && mocha \"out/test/grammar/**/*.test.js\"",
+    "test:integration": "npm run compile && npm run compile-tests && vscode-test",
+    "test:oracle": "npm run compile-tests && mocha --timeout 120000 \"out/test/oracle/**/*.test.js\"",
+    "test": "npm run test:unit && npm run test:grammar && npm run test:integration",
+    "perf": "npm run compile-tests && node --expose-gc test/perf/run.mjs",
+    "release-check": "node scripts/release-check.mjs",
+    "update-test-grammars": "node scripts/update-test-grammars.mjs",
+    "package": "vsce package",
+    "vscode:prepublish": "npm run check-types && node esbuild.mjs --production"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@types/mocha": "10.0.10",
+    "@types/node": "22.20.4",
+    "@types/vscode": "1.108.1",
+    "@vscode/test-cli": "0.0.15",
+    "@vscode/test-electron": "3.1.0",
+    "@vscode/vsce": "4.0.0",
+    "esbuild": "0.28.2",
+    "eslint": "10.11.0",
+    "mocha": "12.0.2",
+    "playwright-core": "1.63.0",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.70.1",
+    "vscode-oniguruma": "2.0.1",
+    "vscode-textmate": "9.3.2"
+  },
+  "overrides": {
+    "@vscode/test-cli": {
+      "mocha": "$mocha"
+    }
+  }
+}

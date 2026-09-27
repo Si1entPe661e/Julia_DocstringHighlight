@@ -1,0 +1,26 @@
+{
+  "docstrings": [
+    {"start":6,"end":15,"kind":"plain","quote":"triple","prefix":null,"targetLine":16},
+    {"start":17,"end":17,"kind":"plain","quote":"single","prefix":null,"targetLine":18,"oracle":"struct-field"},
+    {"start":19,"end":19,"kind":"plain","quote":"single","prefix":null,"targetLine":20,"oracle":"struct-field"},
+    {"start":23,"end":55,"kind":"plain","quote":"triple","prefix":null,"targetLine":56},
+    {"start":70,"end":74,"kind":"atdoc","quote":"triple","prefix":"raw","targetLine":75},
+    {"start":79,"end":79,"kind":"plain","quote":"single","prefix":null,"targetLine":80}
+  ],
+  "inlineCode": [
+    [9,42,45],
+    [13,2,22],
+    [14,2,16],
+    [26,53,56],
+    [30,2,5],
+    [31,2,6],
+    [32,2,11],
+    [36,8,18],
+    [36,62,69],
+    [39,66,72],
+    [73,35,50],
+    [79,22,25],
+    [79,29,32],
+    [79,38,48]
+  ]
+}

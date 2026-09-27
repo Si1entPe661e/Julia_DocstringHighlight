@@ -1,0 +1,16 @@
+>"""
+#^^^ source.julia string.docstring.julia punctuation.definition.string.begin.julia
+>First line.
+#^^^^^^^^^^^ source.julia string.docstring.julia text.docstring.julia
+>Last line."""
+#^^^^^^^^^^ source.julia string.docstring.julia
+#          ^^^ source.julia string.docstring.julia punctuation.definition.string.end.julia
+>m(x) = x
+#^ source.julia entity.name.function.julia
+# ^ source.julia meta.bracket.julia
+#  ^ source.julia
+#   ^ source.julia meta.bracket.julia
+#    ^ source.julia
+#     ^ source.julia keyword.operator.update.julia
+#      ^^ source.julia
+>

@@ -1,0 +1,17 @@
+>x = """
+#^^ source.julia
+#  ^ source.julia keyword.operator.update.julia
+#   ^ source.julia
+#    ^^^ source.julia string.quoted.triple.double.julia punctuation.definition.string.multiline.begin.julia
+># not a heading
+#^^^^^^^^^^^^^^^ source.julia string.quoted.triple.double.julia
+>`not code`
+#^^^^^^^^^^ source.julia string.quoted.triple.double.julia
+>"""
+#^^^ source.julia string.quoted.triple.double.julia punctuation.definition.string.multiline.end.julia
+>y = 1
+#^^ source.julia
+#  ^ source.julia keyword.operator.update.julia
+#   ^ source.julia
+#    ^ source.julia constant.numeric.julia
+>

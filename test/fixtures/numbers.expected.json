@@ -1,0 +1,20 @@
+{
+  "docstrings": [
+    {"start":4,"end":4,"kind":"plain","quote":"triple","prefix":null,"targetLine":5},
+    {"start":8,"end":8,"kind":"plain","quote":"triple","prefix":null,"targetLine":9},
+    {"start":12,"end":12,"kind":"plain","quote":"triple","prefix":null,"targetLine":13},
+    {"start":16,"end":16,"kind":"plain","quote":"triple","prefix":null,"targetLine":17},
+    {"start":20,"end":20,"kind":"plain","quote":"triple","prefix":null,"targetLine":21},
+    {"start":24,"end":24,"kind":"plain","quote":"triple","prefix":null,"targetLine":25},
+    {"start":28,"end":28,"kind":"plain","quote":"triple","prefix":null,"targetLine":29}
+  ],
+  "inlineCode": [
+    [4,9,13],
+    [8,9,14],
+    [12,9,15],
+    [16,9,15],
+    [20,9,13],
+    [24,21,25],
+    [28,24,28]
+  ]
+}

@@ -1,0 +1,20 @@
+>"""
+#^^^ source.julia string.docstring.julia punctuation.definition.string.begin.julia
+>Docs.
+#^^^^^ source.julia string.docstring.julia text.docstring.julia
+>"""
+#^^^ source.julia string.docstring.julia punctuation.definition.string.end.julia
+>function foo()
+#^^^^^^^^ source.julia keyword.other.julia
+#        ^ source.julia
+#         ^^^ source.julia entity.name.function.julia
+#            ^ source.julia meta.bracket.julia
+#             ^ source.julia meta.bracket.julia
+>    return 1
+#^^^^ source.julia
+#    ^^^^^^ source.julia keyword.control.julia
+#          ^ source.julia
+#           ^ source.julia constant.numeric.julia
+>end
+#^^^ source.julia keyword.control.end.julia
+>

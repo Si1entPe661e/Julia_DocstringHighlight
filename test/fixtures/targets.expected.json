@@ -1,0 +1,30 @@
+{
+  "docstrings": [
+    {"start":2,"end":2,"kind":"plain","quote":"triple","prefix":null,"targetLine":3},
+    {"start":5,"end":5,"kind":"plain","quote":"triple","prefix":null,"targetLine":6},
+    {"start":10,"end":10,"kind":"plain","quote":"triple","prefix":null,"targetLine":11},
+    {"start":13,"end":13,"kind":"plain","quote":"triple","prefix":null,"targetLine":14},
+    {"start":16,"end":16,"kind":"plain","quote":"triple","prefix":null,"targetLine":17},
+    {"start":19,"end":19,"kind":"plain","quote":"triple","prefix":null,"targetLine":20},
+    {"start":22,"end":22,"kind":"plain","quote":"triple","prefix":null,"targetLine":23},
+    {"start":25,"end":25,"kind":"plain","quote":"triple","prefix":null,"targetLine":26},
+    {"start":28,"end":28,"kind":"plain","quote":"triple","prefix":null,"targetLine":29},
+    {"start":31,"end":31,"kind":"plain","quote":"triple","prefix":null,"targetLine":32},
+    {"start":34,"end":34,"kind":"plain","quote":"triple","prefix":null,"targetLine":35},
+    {"start":37,"end":37,"kind":"plain","quote":"triple","prefix":null,"targetLine":38},
+    {"start":40,"end":40,"kind":"plain","quote":"triple","prefix":null,"targetLine":41},
+    {"start":43,"end":43,"kind":"plain","quote":"triple","prefix":null,"targetLine":44},
+    {"start":48,"end":48,"kind":"plain","quote":"triple","prefix":null,"targetLine":49},
+    {"start":50,"end":50,"kind":"plain","quote":"single","prefix":null,"targetLine":51,"oracle":"struct-field"},
+    {"start":52,"end":54,"kind":"plain","quote":"triple","prefix":null,"targetLine":55,"oracle":"struct-field"},
+    {"start":58,"end":58,"kind":"plain","quote":"triple","prefix":null,"targetLine":59},
+    {"start":62,"end":62,"kind":"plain","quote":"triple","prefix":null,"targetLine":63},
+    {"start":65,"end":65,"kind":"plain","quote":"triple","prefix":null,"targetLine":66},
+    {"start":68,"end":68,"kind":"plain","quote":"triple","prefix":null,"targetLine":69},
+    {"start":70,"end":70,"kind":"plain","quote":"triple","prefix":null,"targetLine":71}
+  ],
+  "inlineCode": [
+    [68,42,48],
+    [70,41,47]
+  ]
+}

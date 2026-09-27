@@ -1,0 +1,37 @@
+>""" 
+#^^^ source.julia string.docstring.julia punctuation.definition.string.begin.julia
+#   ^ source.julia string.docstring.julia
+># Heading after an opening line with a trailing space
+#^ source.julia string.docstring.julia text.docstring.julia markup.heading.markdown heading.1.markdown punctuation.definition.heading.markdown
+# ^ source.julia string.docstring.julia text.docstring.julia markup.heading.markdown heading.1.markdown
+#  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.julia string.docstring.julia text.docstring.julia markup.heading.markdown heading.1.markdown entity.name.section.markdown
+>"""
+#^^^ source.julia string.docstring.julia punctuation.definition.string.end.julia
+>a(x) = x
+#^ source.julia entity.name.function.julia
+# ^ source.julia meta.bracket.julia
+#  ^ source.julia
+#   ^ source.julia meta.bracket.julia
+#    ^ source.julia
+#     ^ source.julia keyword.operator.update.julia
+#      ^^ source.julia
+>@doc """text on the same line
+#^^^^ source.julia string.docstring.julia support.function.macro.julia
+#    ^ source.julia string.docstring.julia
+#     ^^^ source.julia string.docstring.julia punctuation.definition.string.begin.julia
+#        ^^^^^^^^^^^^^^^^^^^^^ source.julia string.docstring.julia text.docstring.julia
+># Heading
+#^ source.julia string.docstring.julia text.docstring.julia markup.heading.markdown heading.1.markdown punctuation.definition.heading.markdown
+# ^ source.julia string.docstring.julia text.docstring.julia markup.heading.markdown heading.1.markdown
+#  ^^^^^^^ source.julia string.docstring.julia text.docstring.julia markup.heading.markdown heading.1.markdown entity.name.section.markdown
+>"""
+#^^^ source.julia string.docstring.julia punctuation.definition.string.end.julia
+>b(x) = x
+#^ source.julia entity.name.function.julia
+# ^ source.julia meta.bracket.julia
+#  ^ source.julia
+#   ^ source.julia meta.bracket.julia
+#    ^ source.julia
+#     ^ source.julia keyword.operator.update.julia
+#      ^^ source.julia
+>

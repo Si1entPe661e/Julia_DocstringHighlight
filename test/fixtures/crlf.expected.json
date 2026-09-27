@@ -1,0 +1,9 @@
+{
+  "docstrings": [
+    {"start":0,"end":6,"kind":"plain","quote":"triple","prefix":null,"targetLine":7},
+    {"start":15,"end":17,"kind":"atdoc","quote":"triple","prefix":null,"targetLine":18}
+  ],
+  "inlineCode": [
+    [5,2,5]
+  ]
+}

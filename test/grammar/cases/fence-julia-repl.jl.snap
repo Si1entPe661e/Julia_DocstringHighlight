@@ -1,0 +1,30 @@
+>"""
+#^^^ source.julia string.docstring.julia punctuation.definition.string.begin.julia
+>```julia-repl
+#^^^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown punctuation.definition.markdown
+#   ^^^^^^^^^^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown fenced_code.block.language.markdown
+>julia> foo(2)
+#^^^^^^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown meta.embedded.block.julia punctuation.definition.prompt.julia-repl
+#      ^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown meta.embedded.block.julia
+#       ^^^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown meta.embedded.block.julia support.function.julia
+#          ^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown meta.embedded.block.julia meta.bracket.julia
+#           ^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown meta.embedded.block.julia constant.numeric.julia
+#            ^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown meta.embedded.block.julia meta.bracket.julia
+>3
+#^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown meta.embedded.block.julia constant.numeric.julia
+>```
+#^^^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown punctuation.definition.markdown
+>"""
+#^^^ source.julia string.docstring.julia punctuation.definition.string.end.julia
+>foo(x) = x + 1
+#^^^ source.julia entity.name.function.julia
+#   ^ source.julia meta.bracket.julia
+#    ^ source.julia
+#     ^ source.julia meta.bracket.julia
+#      ^ source.julia
+#       ^ source.julia keyword.operator.update.julia
+#        ^^^ source.julia
+#           ^ source.julia keyword.operator.arithmetic.julia
+#            ^ source.julia
+#             ^ source.julia constant.numeric.julia
+>

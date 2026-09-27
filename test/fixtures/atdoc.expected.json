@@ -1,0 +1,13 @@
+{
+  "docstrings": [
+    {"start":2,"end":2,"kind":"atdoc","quote":"triple","prefix":null,"targetLine":2},
+    {"start":4,"end":6,"kind":"atdoc","quote":"triple","prefix":null,"targetLine":7},
+    {"start":9,"end":11,"kind":"atdoc","quote":"triple","prefix":"raw","targetLine":12},
+    {"start":14,"end":16,"kind":"atdoc","quote":"triple","prefix":"doc","targetLine":17},
+    {"start":19,"end":21,"kind":"atdoc","quote":"triple","prefix":null,"targetLine":22},
+    {"start":24,"end":24,"kind":"atdoc","quote":"single","prefix":null,"targetLine":24},
+    {"start":26,"end":28,"kind":"atdoc","quote":"triple","prefix":null,"targetLine":29,"oracle":"arrow-form"},
+    {"start":31,"end":33,"kind":"atdoc","quote":"triple","prefix":null,"targetLine":33}
+  ],
+  "inlineCode": []
+}

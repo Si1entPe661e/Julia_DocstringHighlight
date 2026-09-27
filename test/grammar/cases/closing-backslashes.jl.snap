@@ -1,0 +1,39 @@
+>"""
+#^^^ source.julia string.docstring.julia punctuation.definition.string.begin.julia
+>The quotes after two backslashes close the docstring:
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.julia string.docstring.julia text.docstring.julia
+>\\"""
+#^^ source.julia string.docstring.julia constant.character.escape.julia
+#  ^^^ source.julia string.docstring.julia punctuation.definition.string.end.julia
+>f(x) = x
+#^ source.julia entity.name.function.julia
+# ^ source.julia meta.bracket.julia
+#  ^ source.julia
+#   ^ source.julia meta.bracket.julia
+#    ^ source.julia
+#     ^ source.julia keyword.operator.update.julia
+#      ^^ source.julia
+>
+>"""
+#^^^ source.julia string.docstring.julia punctuation.definition.string.begin.julia
+>The quotes after one or three backslashes are escaped: \"""
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.julia string.docstring.julia text.docstring.julia
+#                                                       ^^ source.julia string.docstring.julia text.docstring.julia constant.character.escape.julia
+#                                                         ^^ source.julia string.docstring.julia text.docstring.julia
+>\\\""" and the docstring goes on; after four it closes:
+#^^ source.julia string.docstring.julia text.docstring.julia constant.character.escape.julia
+#  ^^ source.julia string.docstring.julia text.docstring.julia constant.character.escape.julia
+#    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.julia string.docstring.julia text.docstring.julia
+>\\\\"""
+#^^ source.julia string.docstring.julia constant.character.escape.julia
+#  ^^ source.julia string.docstring.julia constant.character.escape.julia
+#    ^^^ source.julia string.docstring.julia punctuation.definition.string.end.julia
+>g(x) = x
+#^ source.julia entity.name.function.julia
+# ^ source.julia meta.bracket.julia
+#  ^ source.julia
+#   ^ source.julia meta.bracket.julia
+#    ^ source.julia
+#     ^ source.julia keyword.operator.update.julia
+#      ^^ source.julia
+>

@@ -1,0 +1,22 @@
+>""" 
+#^^^ source.julia string.docstring.julia punctuation.definition.string.begin.julia
+#   ^ source.julia string.docstring.julia
+>- item one
+#^ source.julia string.docstring.julia text.docstring.julia markup.list.unnumbered.markdown punctuation.definition.list.begin.markdown
+# ^ source.julia string.docstring.julia text.docstring.julia markup.list.unnumbered.markdown
+#  ^^^^^^^^ source.julia string.docstring.julia text.docstring.julia markup.list.unnumbered.markdown
+>    continuation 4 spaces
+#^^^^ source.julia string.docstring.julia text.docstring.julia markup.list.unnumbered.markdown
+#    ^^^^^^^^^^^^^^^^^^^^^ source.julia string.docstring.julia text.docstring.julia markup.list.unnumbered.markdown
+>    """
+#^^^^ source.julia string.docstring.julia
+#    ^^^ source.julia string.docstring.julia punctuation.definition.string.end.julia
+>k(x) = x
+#^ source.julia entity.name.function.julia
+# ^ source.julia meta.bracket.julia
+#  ^ source.julia
+#   ^ source.julia meta.bracket.julia
+#    ^ source.julia
+#     ^ source.julia keyword.operator.update.julia
+#      ^^ source.julia
+>

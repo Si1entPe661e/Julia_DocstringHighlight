@@ -1,0 +1,35 @@
+{
+  "updated": "2026-09-25",
+  "julia": {
+    "file": "julia_vscode.json",
+    "extension": "julialang.language-julia",
+    "version": "1.243.2",
+    "contributedGrammars": [
+      {
+        "language": "julia",
+        "scopeName": "source.julia",
+        "path": "./syntaxes/julia_vscode.json"
+      },
+      {
+        "language": "juliamarkdown",
+        "scopeName": "text.html.markdown.julia",
+        "path": "./syntaxes/juliamarkdown.json"
+      },
+      {
+        "scopeName": "markdown.julia.codeblock",
+        "path": "./syntaxes/juliacodeblock.json",
+        "injectTo": [
+          "text.html.markdown"
+        ],
+        "embeddedLanguages": {
+          "meta.embedded.block.julia": "julia"
+        }
+      }
+    ]
+  },
+  "markdown": {
+    "file": "markdown.tmLanguage.json",
+    "vscodeVersion": "1.139.1",
+    "grammarVersion": "https://github.com/microsoft/vscode-markdown-tm-grammar/commit/0812fc4b190efc17bfed0d5b4ff918eff8e4e377"
+  }
+}

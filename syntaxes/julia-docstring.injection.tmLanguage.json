@@ -1,0 +1,136 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Julia Docstring (injection)",
+  "scopeName": "markdown.julia.docstring",
+  "injectionSelector": "L:string.docstring.julia -text.docstring.julia",
+  "patterns": [
+    { "include": "#docstring-body" }
+  ],
+  "repository": {
+    "docstring-body": {
+      "comment": "Starts right after the host's opening quotes (\\G holds only at the end of the previous match). Continues line by line until a line contains an unescaped closing \"\"\"; that line is handed back to the host grammar. The guards scan from the start of the line (or the opening quotes) in steps of one character or one backslash escape, so the quotes in \\\"\"\" are escaped and those in \\\\\"\"\" close the string.",
+      "begin": "\\G(?!(?:[^\\\\]|\\\\.)*\"\"\")",
+      "while": "^(?!(?:[^\\\\]|\\\\.)*\"\"\")",
+      "contentName": "text.docstring.julia",
+      "patterns": [
+        { "include": "#fenced-julia" },
+        { "include": "#fenced-other" },
+        { "include": "#indented-code" },
+        { "include": "#admonition" },
+        { "include": "#list-unordered" },
+        { "include": "#list-ordered" },
+        { "include": "text.html.markdown#heading" },
+        { "include": "source.julia#string_escaped_char" },
+        { "include": "source.julia#string_dollar_sign_interpolate" },
+        { "include": "text.html.markdown#inline" }
+      ]
+    },
+    "block-content": {
+      "comment": "Content allowed inside list items and admonition bodies. Relative indentation is handled by \\G after the enclosing while match.",
+      "patterns": [
+        { "include": "#fenced-julia" },
+        { "include": "#fenced-other" },
+        { "include": "#list-unordered" },
+        { "include": "#list-ordered" },
+        { "include": "source.julia#string_escaped_char" },
+        { "include": "source.julia#string_dollar_sign_interpolate" },
+        { "include": "text.html.markdown#inline" }
+      ]
+    },
+    "fenced-julia": {
+      "comment": "Unlabelled fences and Julia-family labels are highlighted as Julia.",
+      "begin": "(^|\\G)(\\s*)(`{3,}|~{3,})\\s*(?i:(jldoctest|julia-repl|julia|jl|@example|@repl|@setup)\\b[^`]*)?$",
+      "end": "(^|\\G)(\\2|\\s{0,3})(\\3)\\s*$",
+      "name": "markup.fenced_code.block.markdown",
+      "beginCaptures": {
+        "3": { "name": "punctuation.definition.markdown" },
+        "4": { "name": "fenced_code.block.language.markdown" }
+      },
+      "endCaptures": {
+        "3": { "name": "punctuation.definition.markdown" }
+      },
+      "patterns": [
+        {
+          "begin": "(^|\\G)(\\s*)(.*)",
+          "while": "(^|\\G)(?!\\s*([`~]{3,})\\s*$)",
+          "contentName": "meta.embedded.block.julia",
+          "patterns": [
+            { "include": "#repl-prompt" },
+            { "include": "source.julia" }
+          ]
+        }
+      ]
+    },
+    "repl-prompt": {
+      "match": "(^|\\G)(julia>)(?=\\s|$)",
+      "captures": {
+        "2": { "name": "punctuation.definition.prompt.julia-repl" }
+      }
+    },
+    "fenced-other": {
+      "comment": "Fences with any other language label are plain text.",
+      "begin": "(^|\\G)(\\s*)(`{3,}|~{3,})\\s*([^`\\s]+)[^`]*$",
+      "end": "(^|\\G)(\\2|\\s{0,3})(\\3)\\s*$",
+      "name": "markup.fenced_code.block.markdown",
+      "beginCaptures": {
+        "3": { "name": "punctuation.definition.markdown" },
+        "4": { "name": "fenced_code.block.language.markdown" }
+      },
+      "endCaptures": {
+        "3": { "name": "punctuation.definition.markdown" }
+      },
+      "patterns": [
+        {
+          "begin": "(^|\\G)(\\s*)(.*)",
+          "while": "(^|\\G)(?!\\s*([`~]{3,})\\s*$)",
+          "contentName": "markup.raw.block.markdown"
+        }
+      ]
+    },
+    "indented-code": {
+      "comment": "Four-space / tab indented block: by Julia convention the signature at the top of a docstring.",
+      "begin": "(^|\\G)([ ]{4}|\\t)",
+      "while": "(^|\\G)([ ]{4}|\\t)",
+      "name": "markup.raw.block.markdown",
+      "contentName": "meta.embedded.block.julia",
+      "patterns": [
+        { "include": "source.julia" }
+      ]
+    },
+    "admonition": {
+      "comment": "Documenter admonition: !!! note \"Title\" followed by a four-space indented body.",
+      "begin": "(^|\\G)(!!!)[ \\t]+([A-Za-z]+)(?:[ \\t]+(\"[^\"]*\"))?[ \\t]*$",
+      "while": "((^|\\G)([ ]{4}|\\t))|(^[ \\t]*$)",
+      "beginCaptures": {
+        "2": { "name": "punctuation.definition.heading.markdown" },
+        "3": { "name": "markup.heading.markdown entity.name.section.markdown" },
+        "4": { "name": "markup.heading.markdown" }
+      },
+      "patterns": [
+        { "include": "#block-content" }
+      ]
+    },
+    "list-unordered": {
+      "begin": "(^|\\G)([ ]{0,3})([*+-])([ \\t])",
+      "while": "((^|\\G)([ ]{2,4}|\\t))|(^[ \\t]*$)",
+      "name": "markup.list.unnumbered.markdown",
+      "beginCaptures": {
+        "3": { "name": "punctuation.definition.list.begin.markdown" }
+      },
+      "patterns": [
+        { "include": "#block-content" }
+      ]
+    },
+    "list-ordered": {
+      "begin": "(^|\\G)([ ]{0,3})([0-9]+[.)])([ \\t])",
+      "while": "((^|\\G)([ ]{2,4}|\\t))|(^[ \\t]*$)",
+      "name": "markup.list.numbered.markdown",
+      "beginCaptures": {
+        "3": { "name": "punctuation.definition.list.begin.markdown" }
+      },
+      "patterns": [
+        { "include": "#block-content" }
+      ]
+    }
+  }
+}

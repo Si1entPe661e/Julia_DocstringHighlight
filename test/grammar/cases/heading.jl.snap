@@ -1,0 +1,37 @@
+>"""
+#^^^ source.julia string.docstring.julia punctuation.definition.string.begin.julia
+>    heading(x)
+#^^^^ source.julia string.docstring.julia text.docstring.julia markup.raw.block.markdown
+#    ^^^^^^^ source.julia string.docstring.julia text.docstring.julia markup.raw.block.markdown meta.embedded.block.julia support.function.julia
+#           ^ source.julia string.docstring.julia text.docstring.julia markup.raw.block.markdown meta.embedded.block.julia meta.bracket.julia
+#            ^ source.julia string.docstring.julia text.docstring.julia markup.raw.block.markdown meta.embedded.block.julia
+#             ^ source.julia string.docstring.julia text.docstring.julia markup.raw.block.markdown meta.embedded.block.julia meta.bracket.julia
+>
+># Arguments
+#^ source.julia string.docstring.julia text.docstring.julia markup.heading.markdown heading.1.markdown punctuation.definition.heading.markdown
+# ^ source.julia string.docstring.julia text.docstring.julia markup.heading.markdown heading.1.markdown
+#  ^^^^^^^^^ source.julia string.docstring.julia text.docstring.julia markup.heading.markdown heading.1.markdown entity.name.section.markdown
+>
+>- `x`: a value
+#^ source.julia string.docstring.julia text.docstring.julia markup.list.unnumbered.markdown punctuation.definition.list.begin.markdown
+# ^ source.julia string.docstring.julia text.docstring.julia markup.list.unnumbered.markdown
+#  ^ source.julia string.docstring.julia text.docstring.julia markup.list.unnumbered.markdown markup.inline.raw.string.markdown punctuation.definition.raw.markdown
+#   ^ source.julia string.docstring.julia text.docstring.julia markup.list.unnumbered.markdown markup.inline.raw.string.markdown
+#    ^ source.julia string.docstring.julia text.docstring.julia markup.list.unnumbered.markdown markup.inline.raw.string.markdown punctuation.definition.raw.markdown
+#     ^^^^^^^^^ source.julia string.docstring.julia text.docstring.julia markup.list.unnumbered.markdown
+>
+>## Details
+#^^ source.julia string.docstring.julia text.docstring.julia markup.heading.markdown heading.2.markdown punctuation.definition.heading.markdown
+#  ^ source.julia string.docstring.julia text.docstring.julia markup.heading.markdown heading.2.markdown
+#   ^^^^^^^ source.julia string.docstring.julia text.docstring.julia markup.heading.markdown heading.2.markdown entity.name.section.markdown
+>"""
+#^^^ source.julia string.docstring.julia punctuation.definition.string.end.julia
+>heading(x) = x
+#^^^^^^^ source.julia entity.name.function.julia
+#       ^ source.julia meta.bracket.julia
+#        ^ source.julia
+#         ^ source.julia meta.bracket.julia
+#          ^ source.julia
+#           ^ source.julia keyword.operator.update.julia
+#            ^^ source.julia
+>

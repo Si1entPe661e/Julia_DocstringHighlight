@@ -1,0 +1,13 @@
+>"""doc with `code`"""
+#^^^ source.julia string.quoted.triple.double.julia punctuation.definition.string.multiline.begin.julia
+#   ^^^^^^^^^^^^^^^ source.julia string.quoted.triple.double.julia
+#                  ^^^ source.julia string.quoted.triple.double.julia punctuation.definition.string.multiline.end.julia
+>h(x) = x
+#^ source.julia entity.name.function.julia
+# ^ source.julia meta.bracket.julia
+#  ^ source.julia
+#   ^ source.julia meta.bracket.julia
+#    ^ source.julia
+#     ^ source.julia keyword.operator.update.julia
+#      ^^ source.julia
+>

@@ -1,0 +1,17 @@
+{
+  "docstrings": [
+    {"start":2,"end":6,"kind":"plain","quote":"triple","prefix":null,"targetLine":7},
+    {"start":9,"end":13,"kind":"plain","quote":"triple","prefix":null,"targetLine":14},
+    {"start":16,"end":16,"kind":"plain","quote":"triple","prefix":null,"targetLine":17},
+    {"start":19,"end":19,"kind":"plain","quote":"single","prefix":null,"targetLine":20},
+    {"start":22,"end":22,"kind":"plain","quote":"triple","prefix":null,"targetLine":22},
+    {"start":24,"end":26,"kind":"plain","quote":"triple","prefix":null,"targetLine":27},
+    {"start":29,"end":31,"kind":"plain","quote":"triple","prefix":null,"targetLine":32},
+    {"start":34,"end":36,"kind":"plain","quote":"triple","prefix":null,"targetLine":37},
+    {"start":38,"end":40,"kind":"plain","quote":"triple","prefix":null,"targetLine":41},
+    {"start":44,"end":46,"kind":"plain","quote":"triple","prefix":null,"targetLine":47},
+    {"start":50,"end":52,"kind":"plain","quote":"triple","prefix":null,"targetLine":53},
+    {"start":57,"end":59,"kind":"plain","quote":"triple","prefix":null,"targetLine":60}
+  ],
+  "inlineCode": []
+}

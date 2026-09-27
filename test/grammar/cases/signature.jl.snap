@@ -1,0 +1,26 @@
+>"""
+#^^^ source.julia string.docstring.julia punctuation.definition.string.begin.julia
+>    run_mle(l, θ₀)
+#^^^^ source.julia string.docstring.julia text.docstring.julia markup.raw.block.markdown
+#    ^^^^^^^ source.julia string.docstring.julia text.docstring.julia markup.raw.block.markdown meta.embedded.block.julia support.function.julia
+#           ^ source.julia string.docstring.julia text.docstring.julia markup.raw.block.markdown meta.embedded.block.julia meta.bracket.julia
+#            ^ source.julia string.docstring.julia text.docstring.julia markup.raw.block.markdown meta.embedded.block.julia
+#             ^ source.julia string.docstring.julia text.docstring.julia markup.raw.block.markdown meta.embedded.block.julia punctuation.separator.comma.julia
+#              ^^^ source.julia string.docstring.julia text.docstring.julia markup.raw.block.markdown meta.embedded.block.julia
+#                 ^ source.julia string.docstring.julia text.docstring.julia markup.raw.block.markdown meta.embedded.block.julia meta.bracket.julia
+>
+>Runs MLE estimation.
+#^^^^^^^^^^^^^^^^^^^^ source.julia string.docstring.julia text.docstring.julia
+>"""
+#^^^ source.julia string.docstring.julia punctuation.definition.string.end.julia
+>run_mle(l, θ₀) = l
+#^^^^^^^ source.julia entity.name.function.julia
+#       ^ source.julia meta.bracket.julia
+#        ^ source.julia
+#         ^ source.julia punctuation.separator.comma.julia
+#          ^^^ source.julia
+#             ^ source.julia meta.bracket.julia
+#              ^ source.julia
+#               ^ source.julia keyword.operator.update.julia
+#                ^^ source.julia
+>

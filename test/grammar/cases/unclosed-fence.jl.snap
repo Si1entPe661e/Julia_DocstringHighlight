@@ -1,0 +1,31 @@
+>"""
+#^^^ source.julia string.docstring.julia punctuation.definition.string.begin.julia
+>Text
+#^^^^ source.julia string.docstring.julia text.docstring.julia
+>
+>```julia
+#^^^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown punctuation.definition.markdown
+#   ^^^^^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown fenced_code.block.language.markdown
+>x = 1
+#^^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown meta.embedded.block.julia
+#  ^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown meta.embedded.block.julia keyword.operator.update.julia
+#   ^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown meta.embedded.block.julia
+#    ^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown meta.embedded.block.julia constant.numeric.julia
+>"""
+#^^^ source.julia string.docstring.julia punctuation.definition.string.end.julia
+>function foo()
+#^^^^^^^^ source.julia keyword.other.julia
+#        ^ source.julia
+#         ^^^ source.julia entity.name.function.julia
+#            ^ source.julia meta.bracket.julia
+#             ^ source.julia meta.bracket.julia
+>    y = "abc"
+#^^^^^^ source.julia
+#      ^ source.julia keyword.operator.update.julia
+#       ^ source.julia
+#        ^ source.julia string.quoted.double.julia punctuation.definition.string.begin.julia
+#         ^^^ source.julia string.quoted.double.julia
+#            ^ source.julia string.quoted.double.julia punctuation.definition.string.end.julia
+>end
+#^^^ source.julia keyword.control.end.julia
+>

@@ -1,0 +1,23 @@
+>module M
+#^^^^^^ source.julia keyword.other.julia
+#      ^^ source.julia
+>    """
+#^^^^ source.julia
+#    ^^^ source.julia string.quoted.triple.double.julia punctuation.definition.string.multiline.begin.julia
+>    # Heading (indented 4)
+#^^^^^^^^^^^^^^^^^^^^^^^^^^ source.julia string.quoted.triple.double.julia
+>    """
+#^^^^ source.julia string.quoted.triple.double.julia
+#    ^^^ source.julia string.quoted.triple.double.julia punctuation.definition.string.multiline.end.julia
+>    f(x) = x
+#^^^^ source.julia
+#    ^ source.julia entity.name.function.julia
+#     ^ source.julia meta.bracket.julia
+#      ^ source.julia
+#       ^ source.julia meta.bracket.julia
+#        ^ source.julia
+#         ^ source.julia keyword.operator.update.julia
+#          ^^ source.julia
+>end
+#^^^ source.julia keyword.control.end.julia
+>

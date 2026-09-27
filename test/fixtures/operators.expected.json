@@ -1,0 +1,11 @@
+{
+  "docstrings": [
+    {"start":10,"end":10,"kind":"atdoc","quote":"single","prefix":null,"targetLine":10},
+    {"start":12,"end":14,"kind":"atdoc","quote":"triple","prefix":null,"targetLine":14},
+    {"start":16,"end":16,"kind":"atdoc","quote":"single","prefix":"raw","targetLine":16},
+    {"start":18,"end":18,"kind":"atdoc","quote":"single","prefix":null,"targetLine":18},
+    {"start":20,"end":20,"kind":"plain","quote":"single","prefix":null,"targetLine":20},
+    {"start":22,"end":22,"kind":"plain","quote":"triple","prefix":null,"targetLine":22}
+  ],
+  "inlineCode": []
+}

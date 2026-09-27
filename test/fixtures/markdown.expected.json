@@ -1,0 +1,14 @@
+{
+  "docstrings": [
+    {"start":0,"end":25,"kind":"plain","quote":"triple","prefix":null,"targetLine":26}
+  ],
+  "inlineCode": [
+    [3,53,56],
+    [7,2,5],
+    [8,35,41],
+    [9,2,6],
+    [10,12,18],
+    [14,60,71],
+    [17,28,34]
+  ]
+}
