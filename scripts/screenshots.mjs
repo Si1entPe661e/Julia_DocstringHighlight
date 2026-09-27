@@ -1,5 +1,5 @@
 // Renders test/fixtures/showcase.jl in a real VS Code window, with and without this extension, for the
-// theme check (05 §8). The README images come from readme-images.mjs.
+// theme check. The README images come from readme-images.mjs.
 //
 // Captures the editor element only (see vscode-session.mjs for how VS Code is started).
 //
@@ -61,7 +61,7 @@ async function capture(theme, withExtension, file) {
   try {
     await editor.screenshot({ path: file });
     // With the extension: a close-up of the left edge of the first docstrings (lines 6–21), to check
-    // the 1px guide (05 §2), and a view of the examples.
+    // the 1px guide, and a view of the examples.
     const lines = withExtension ? await editor.locator('.view-lines').boundingBox() : null;
     if (lines) {
       await window.screenshot({

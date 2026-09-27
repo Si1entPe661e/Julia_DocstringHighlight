@@ -1,4 +1,4 @@
-// Layer 2: three independent decoration types (ADR-006, 05 §1). No color literals here: every color
+// Layer 2: three independent decoration types. No color literals here: every color
 // is a ThemeColor that refers to a `contributes.colors` slot, so theme switches need no code.
 import * as vscode from 'vscode';
 import type { Settings } from './configuration';
@@ -7,7 +7,7 @@ import type { ScanResult } from './detector';
 /** [startLine, startCharacter, endLine, endCharacter] */
 export type RangeTuple = [number, number, number, number];
 
-/** What was last applied to an editor, for the debug command used by integration tests (06 §4). */
+/** What was last applied to an editor, for the debug command used by integration tests. */
 export interface AppliedDecorations {
   background: RangeTuple[];
   guide: RangeTuple[];
@@ -40,7 +40,7 @@ export class Decorations implements vscode.Disposable {
 
   apply(editor: vscode.TextEditor, result: ScanResult): void {
     // End at the closing quotes, never at (end.line + 1, 0): a whole-line decoration would also
-    // cover the next line (05 §1.1).
+    // cover the next line.
     const regions = result.docstrings.map((d) => new vscode.Range(d.start.line, 0, d.end.line, d.end.col));
     const chips = result.inlineCode.map((s) => new vscode.Range(s.line, s.startCol, s.line, s.endCol));
     this.set(editor, regions, chips);

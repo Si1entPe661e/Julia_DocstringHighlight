@@ -1,10 +1,10 @@
-// Fixture-driven detector tests (06 §2.1): every test/fixtures/<name>.jl is scanned and compared with
+// Fixture-driven detector tests: every test/fixtures/<name>.jl is scanned and compared with
 // <name>.expected.json. Regenerate with test/tools/update-expected.mjs and review the diff.
 import * as assert from 'node:assert/strict';
 import { scan } from '../../src/detector';
 import { fixtureNames, readExpected, readFixture } from '../fixtureData';
 
-describe('fixtures (06 §2.1)', () => {
+describe('fixtures', () => {
   for (const name of fixtureNames()) {
     it(name, () => {
       const result = scan(readFixture(name));
@@ -28,7 +28,7 @@ describe('fixtures (06 §2.1)', () => {
     });
   }
 
-  it('covers every fixture listed in 06 §2.1', () => {
+  it('has a fixture for every topic', () => {
     const required = ['basic', 'targets', 'atdoc', 'markdown', 'doctest', 'multiline-string', 'edge-cases', 'blocks', 'showcase', 'numbers', 'operators'];
     for (const r of required) assert.ok(fixtureNames().includes(`${r}.jl`), `missing fixture ${r}.jl`);
   });

@@ -1,4 +1,4 @@
-// Public data types of the docstring detector (03 §5).
+// Public data types of the docstring detector.
 // Positions are 0-based; columns are UTF-16 code units, the same unit as vscode.Position.
 
 export interface Pos {

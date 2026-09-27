@@ -1,6 +1,6 @@
-// Inline code spans inside docstring prose, for the chip decoration (03 §5.1).
+// Inline code spans inside docstring prose, for the chip decoration.
 //
-// Block structure follows the injection grammar (04 §5) so that chips appear where the grammar
+// Block structure follows the injection grammar so that chips appear where the grammar
 // colours `markup.inline.raw`: fenced code and four-space indented code are skipped; list items and
 // admonition bodies are prose. Indentation is measured after Julia's triple-quote dedent, so
 // docstrings indented inside a module are classified the same way as top-level ones.
@@ -132,7 +132,7 @@ class BlockTracker {
     return p;
   }
 
-  /** Characters consumed by the container's `while` pattern (04 §9), or -1 if it does not match. */
+  /** Characters consumed by the container's `while` pattern in the grammar, or -1 if it does not match. */
   private containerIndent(s: number, e: number): number {
     const text = this.text;
     if (s < e && text.charCodeAt(s) === CH_TAB) return 1;

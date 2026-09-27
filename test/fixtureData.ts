@@ -1,4 +1,4 @@
-// Shared access to test/fixtures/<name>.jl and <name>.expected.json (06 §2.1).
+// Shared access to test/fixtures/<name>.jl and <name>.expected.json.
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 
@@ -12,7 +12,7 @@ export interface ExpectedDocstring {
   quote: 'single' | 'triple';
   prefix: string | null;
   targetLine: number;
-  /** Why the Julia parser oracle does not report this docstring (06 §5). */
+  /** Why the Julia parser oracle does not report this docstring. */
   oracle?: 'arrow-form' | 'deviation';
 }
 

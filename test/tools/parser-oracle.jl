@@ -1,4 +1,4 @@
-# Julia parser oracle for the docstring detector (06 §5).
+# Julia parser oracle for the docstring detector.
 #
 # Usage: julia parser-oracle.jl file1.jl [file2.jl ...]
 #        julia parser-oracle.jl --list paths.txt
@@ -11,8 +11,8 @@
 #
 # Known cases the parser does not report but the detector decorates on purpose are annotated in the
 # fixtures' expected.json files: `@doc str ->` newline `target` (one argument for the parser, expanded
-# by the docsystem) and the deviations of 03 §9. Struct field docstrings are neither reported by the
-# parser nor decorated.
+# by the docsystem) and strings in block bodies that are not indented. Struct field docstrings are
+# neither reported by the parser nor decorated.
 
 function macroname(m)
     m isa GlobalRef && return string(m.name)

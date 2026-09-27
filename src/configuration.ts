@@ -1,4 +1,4 @@
-// The four settings of v0.1 (01 §7). Colors are not settings: they are theme color slots (05 §3).
+// The four settings. Colors are not settings: they are theme color slots.
 import * as vscode from 'vscode';
 
 export const SECTION = 'juliaDocstringHighlight';

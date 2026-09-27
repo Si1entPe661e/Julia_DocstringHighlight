@@ -1,4 +1,4 @@
-// Lexical scanner for the parts of Julia syntax the docstring detector needs (03 §4).
+// Lexical scanner for the parts of Julia syntax the docstring detector needs.
 //
 // The lexer skips whitespace and comments (trivia) and reports every newline outside strings and
 // comments as a NEWLINE token. Strings, command strings and character literals are consumed whole,
@@ -350,7 +350,7 @@ export function skipBlockComment(text: string, i: number): number {
  * Scans the body of a string or command literal starting at `i` (just after the opening delimiter).
  * A backslash escapes the next character: for prefixed (raw-like) literals this finds the same end.
  * A triple-quoted literal ends at the first unescaped triple delimiter, as in JuliaSyntax: in
- * `"""a""""` the fourth quote starts a new string (08 §5).
+ * `"""a""""` the fourth quote starts a new string.
  * Returns the offset after the closing delimiter, or -1 if the literal is not terminated.
  */
 export function scanStringBody(text: string, i: number, triple: boolean, delim: number, interpolate: boolean): number {

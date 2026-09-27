@@ -1,11 +1,10 @@
-// Docstring detection on top of the lexer (03 §3).
+// Docstring detection on top of the lexer.
 //
 // A string literal is a docstring when it forms a statement of its own (bracket depth 0, after the
 // start of the file, a `;`, or a newline that follows a complete expression) in a block where Julia
 // parses docstrings, and is followed on the same line, or after exactly one newline, by a token that
 // does not close a block. `@doc` forms accept any string literal (including `raw"…"`) and the
-// `@doc str ->` newline `target` form. Blocks are tracked by their keywords and `end` (ADR-011);
-// see 03 §9 for the known deviations.
+// `@doc str ->` newline `target` form. Blocks are tracked by their keywords and `end`.
 
 import {
   isAssignmentAt,
@@ -245,9 +244,9 @@ function trackBlock(blocks: OpenBlock[], lines: LineStarts, lexer: Lexer): void 
 
 /**
  * Whether a string statement at `pos` stands where Julia parses docstrings: at the top level or
- * directly in `module`, `baremodule`, `begin` or `quote` (03 §2.1), so not in a function, `if` or
+ * directly in `module`, `baremodule`, `begin` or `quote`, so not in a function, `if` or
  * loop body. Strings in `struct` bodies are not decorated either, although the docsystem collects
- * them as field docs when the struct itself is documented (03 §2.8).
+ * them as field docs when the struct itself is documented.
  *
  * A block that does not take docstrings contains the string only when the string is indented deeper
  * than the block's first line. Such a block whose `end` is still missing while typing would
@@ -332,7 +331,7 @@ export function resolveTarget(text: string, from: number, atDoc: boolean): numbe
     k = lexer.next();
   }
   if (atDoc && newlines === 0 && k === Tok.ARROW) {
-    // `@doc str ->` newline `target`: the docsystem expands the anonymous-function form (03 §2.5).
+    // `@doc str ->` newline `target`: the docsystem expands the anonymous-function form.
     do k = lexer.next();
     while (k === Tok.NEWLINE);
     newlines = 1;

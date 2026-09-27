@@ -1,8 +1,9 @@
-// Compares the detector with the Julia parser on real code (06 §5): every .jl file under the given
+// Compares the detector with the Julia parser on real code: every .jl file under the given
 // directories, except in test/ and deps/ directories. Good corpora are Julia's own base/ and
 // stdlib/ (share/julia in a Julia installation) and ~/.julia/packages. Some differences are expected:
-// the deviations of 03 §9, and `@doc` forms whose docstring is not a string literal (`@doc $str f`);
-// review the rest. Run `npm run compile-tests` first; needs Julia (JULIA=/path/to/julia).
+// strings in block bodies that are not indented (see the README's known limitations), and `@doc`
+// forms whose docstring is not a string literal (`@doc $str f`); review the rest. Run
+// `npm run compile-tests` first; needs Julia (JULIA=/path/to/julia).
 //
 // Usage: node test/tools/corpus-check.mjs <dir> [<dir> ...]
 import { spawnSync } from 'node:child_process';

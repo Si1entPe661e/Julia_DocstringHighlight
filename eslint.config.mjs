@@ -23,7 +23,7 @@ export default defineConfig(
     },
   },
   {
-    // Layer 1 is a pure module: it must stay testable in plain Node (02 §4).
+    // The detector is a pure module: it must stay testable in plain Node.
     files: ['src/detector/**/*.ts'],
     rules: {
       'no-restricted-imports': ['error', { paths: [{ name: 'vscode', message: 'src/detector must not depend on vscode.' }] }],

@@ -1,5 +1,5 @@
 // Tokenizes Julia source with the vendored host grammars (test/grammars) and, optionally, this
-// extension's injection grammar, wired the way package.json declares it (06 §3.1).
+// extension's injection grammar, wired the way package.json declares it.
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import * as oniguruma from 'vscode-oniguruma';

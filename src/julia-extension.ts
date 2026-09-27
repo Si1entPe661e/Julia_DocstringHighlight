@@ -1,7 +1,7 @@
-// Soft dependency on the official Julia extension (ADR-007).
+// Soft dependency on the official Julia extension.
 //
 // VS Code ships a built-in `vscode.julia` extension that registers the `julia` language and the same
-// `source.julia` grammar (identical `string.docstring.julia` rules and repository names, 08 §2.4), so
+// `source.julia` grammar (identical `string.docstring.julia` rules and repository names), so
 // this extension works without the official one. Its presence is therefore only logged.
 import * as vscode from 'vscode';
 

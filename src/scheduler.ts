@@ -1,4 +1,4 @@
-// Scan scheduling: a 100 ms debounce per document and a cache keyed by uri + version (03 §7).
+// Scan scheduling: a 100 ms debounce per document and a cache keyed by uri + version.
 // Several editors showing the same document share one cached result.
 import * as vscode from 'vscode';
 import { scan, type ScanResult } from './detector';

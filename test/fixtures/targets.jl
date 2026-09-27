@@ -1,4 +1,4 @@
-# Every kind of documented expression (03 §2.3).
+# Every kind of documented expression.
 
 """Struct."""
 struct Foo end

@@ -1,4 +1,4 @@
-# @doc forms (03 §2.5).
+# @doc forms.
 
 @doc """Same line.""" same_line(x) = x
 

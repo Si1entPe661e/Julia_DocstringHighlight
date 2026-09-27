@@ -1,4 +1,4 @@
-// Release checks (06 §9): everything that has to pass before a .vsix is published.
+// Release checks: everything that has to pass before a .vsix is published.
 //
 //   npm run release-check
 //

@@ -1,5 +1,5 @@
-// Grammar tests for the docstring injection (06 §3): snapshots of every case, the targeted checks of
-// 06 §3.2, and the comparison with the host grammar alone (06 §3.3, acceptance J).
+// Grammar tests for the docstring injection: snapshots of every case, targeted checks of the scopes
+// inside docstrings, and the comparison with the host grammar alone outside strings.
 //
 // Update snapshots after reviewing a grammar change: UPDATE_SNAPSHOTS=1 npm run test:grammar
 import * as assert from 'node:assert/strict';
@@ -62,7 +62,7 @@ function lacks(scopes: Iterable<string>, ...unexpected: string[]): void {
 /** Scopes this extension's grammar can introduce. */
 const INJECTED = ['text.docstring.julia', 'markup', 'meta.embedded.block.julia', 'punctuation.definition.prompt.julia-repl'];
 
-describe('grammar snapshots (06 §3)', () => {
+describe('grammar snapshots', () => {
   for (const file of caseFiles()) {
     it(file, async () => {
       const t = await tokenizeCase(file);
@@ -77,15 +77,15 @@ describe('grammar snapshots (06 §3)', () => {
   }
 });
 
-describe('grammar: docstring content (06 §3.2)', () => {
-  it('heading.jl: headings are markup.heading (acceptance D)', async () => {
+describe('grammar: docstring content', () => {
+  it('heading.jl: headings are markup.heading', async () => {
     const t = await tokenizeCase('heading.jl');
     has(scopesAt(t, 'Arguments'), 'string.docstring.julia', 'text.docstring.julia', 'markup.heading.markdown', 'entity.name.section.markdown');
     has(scopesAt(t, '# Arguments'), 'punctuation.definition.heading.markdown');
     has(scopesAt(t, 'Details'), 'markup.heading.markdown');
   });
 
-  it('inline-code.jl: inline code is markup.inline.raw (acceptance E)', async () => {
+  it('inline-code.jl: inline code is markup.inline.raw', async () => {
     const t = await tokenizeCase('inline-code.jl');
     has(scopesAt(t, 'θ₀'), 'markup.inline.raw.string.markdown');
     has(scopesAt(t, '\\\\alpha'), 'markup.inline.raw.string.markdown');
@@ -95,13 +95,13 @@ describe('grammar: docstring content (06 §3.2)', () => {
     has(scopesAt(t, 'Use '), 'text.docstring.julia');
   });
 
-  it('fence-unlabelled.jl: an unlabelled fence is Julia (acceptance F)', async () => {
+  it('fence-unlabelled.jl: an unlabelled fence is Julia', async () => {
     const t = await tokenizeCase('fence-unlabelled.jl');
     has(scopesAt(t, 'optimize'), 'markup.fenced_code.block.markdown', 'meta.embedded.block.julia', 'support.function.julia');
     has(scopesAt(t, '```'), 'punctuation.definition.markdown');
   });
 
-  it('fence-jldoctest.jl: julia> is a prompt, input and output are Julia (acceptance G)', async () => {
+  it('fence-jldoctest.jl: julia> is a prompt, input and output are Julia', async () => {
     const t = await tokenizeCase('fence-jldoctest.jl');
     has(scopesAt(t, 'jldoctest'), 'fenced_code.block.language.markdown');
     has(scopesAt(t, 'julia>'), 'punctuation.definition.prompt.julia-repl', 'meta.embedded.block.julia');
@@ -207,7 +207,7 @@ describe('grammar: docstring content (06 §3.2)', () => {
   });
 });
 
-describe('grammar: safety rules (04 §4, acceptance J)', () => {
+describe('grammar: safety rules', () => {
   /** The closing quotes on `closingLine` end the string, and `codeLines` are untouched code. */
   const closesCleanly = (t: Tokenized, closingLine: number, codeLines: number[]): void => {
     has(scopesAt(t, '"""', countQuotesBefore(t, closingLine)), 'punctuation.definition.string.end.julia');
@@ -280,13 +280,13 @@ describe('grammar: safety rules (04 §4, acceptance J)', () => {
     has(scopesAt(t, 'not a heading'), 'string.quoted.triple.double.julia');
   });
 
-  it('indented-docstring.jl: an indented docstring is not injected (03 §8)', async () => {
+  it('indented-docstring.jl: an indented docstring is not injected', async () => {
     const t = await tokenizeCase('indented-docstring.jl');
     for (let line = 0; line < 6; line++) lacks(lineScopes(t, line), ...INJECTED);
   });
 });
 
-describe('grammar: backslashes before the closing quotes (04 §4)', () => {
+describe('grammar: backslashes before the closing quotes', () => {
   // `tail`, n backslashes, `"""`. With an even n the backslashes escape each other and the quotes close
   // the string on that line; with an odd n the first quote is escaped and the string goes on to the
   // `"""` in the last line, which is a comment when the string is already closed.
@@ -320,7 +320,7 @@ describe('grammar: backslashes before the closing quotes (04 §4)', () => {
   }
 });
 
-describe('grammar: identical to the host grammar outside strings (06 §3.3)', () => {
+describe('grammar: identical to the host grammar outside strings', () => {
   const sources = (): Array<[string, string]> => [
     ['showcase.jl', path.join(FIXTURES, 'showcase.jl')],
     ['markdown.jl', path.join(FIXTURES, 'markdown.jl')],
@@ -343,7 +343,7 @@ describe('grammar: identical to the host grammar outside strings (06 §3.3)', ()
   }
 });
 
-describe('grammar: no competing docstring injection (07 §9)', () => {
+describe('grammar: no competing docstring injection', () => {
   it('the official extension registers no grammar that injects into Julia strings', () => {
     const sources = JSON.parse(fs.readFileSync(path.join(ROOT, 'test/grammars/SOURCES.json'), 'utf8')) as {
       julia: { contributedGrammars: Array<{ scopeName: string; path: string; injectTo?: string[] }> };
@@ -351,10 +351,10 @@ describe('grammar: no competing docstring injection (07 §9)', () => {
     const offenders = sources.julia.contributedGrammars.filter(
       (g) => g.injectTo?.includes('source.julia') || /docstring/i.test(g.path),
     );
-    assert.deepEqual(offenders, [], 'julialang.language-julia registers a docstring injection again: see 07 §9');
+    assert.deepEqual(offenders, [], 'julialang.language-julia registers a docstring injection again, which would compete with this one');
   });
 
-  it('the host grammar still provides what the injection relies on (04 §4 rule 5)', () => {
+  it('the host grammar still provides what the injection relies on', () => {
     const julia = JSON.parse(fs.readFileSync(path.join(ROOT, 'test/grammars/julia_vscode.json'), 'utf8')) as {
       repository: Record<string, unknown>;
     };

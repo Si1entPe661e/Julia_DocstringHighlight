@@ -14,7 +14,7 @@ function cases(table: ReadonlyArray<readonly [string, string, Array<[number, num
   }
 }
 
-describe('detector: true positives (06 §2.2)', () => {
+describe('detector: true positives', () => {
   cases([
     ['1. function', `${Q}docs${Q}\nfunction foo() end\n`, [[0, 0, 1]]],
     ['2. short-form function', `${Q}docs${Q}\nfoo(x) = x\n`, [[0, 0, 1]]],
@@ -73,7 +73,7 @@ describe('detector: true positives (06 §2.2)', () => {
   ]);
 });
 
-describe('detector: false positives (06 §2.3)', () => {
+describe('detector: false positives', () => {
   cases([
     ['1. assignment', `x = ${Q}plain${Q}\n`, []],
     ['2a. println argument', `println(${Q}plain${Q})\nfoo(x) = x\n`, []],
@@ -113,7 +113,7 @@ describe('detector: false positives (06 §2.3)', () => {
   ]);
 });
 
-describe('detector: known deviations from the parser (06 §2.4, 03 §9)', () => {
+describe('detector: known deviations from the parser', () => {
   // An unindented block body cannot be told from the code after a block whose `end` is not typed yet.
   cases([
     ['1. deviation: unindented function body', `function outer()\n${Q}docs${Q}\ninner(x) = x\nend\n`, [[1, 1, 2]]],
@@ -271,7 +271,7 @@ describe('detector: operators after the string (verified against the Julia 1.13 
   ]);
 });
 
-describe('detector: incomplete input while typing (03 §6)', () => {
+describe('detector: incomplete input while typing', () => {
   it('an unclosed """ pairs with the next opening quotes, as in Julia and the host grammar', () => {
     const src = `${Q}\ntyping\n\n${Q}\ndoc\n${Q}\nf(x) = x\n`;
     // The string runs from line 0 to line 3; `doc` then becomes its target.

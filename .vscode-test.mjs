@@ -1,4 +1,4 @@
-// Integration test configuration for @vscode/test-cli (06 §4).
+// Integration test configuration for @vscode/test-cli.
 //
 // VS Code ships a built-in `vscode.julia` extension that registers the `julia` language and the same
 // `source.julia` grammar as the official extension, so the official Julia extension is not required

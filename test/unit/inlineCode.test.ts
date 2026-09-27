@@ -10,7 +10,7 @@ function spans(body: string, wrap = (b: string) => `${Q}\n${b}\n${Q}\nf(x) = x\n
   return scan(src).inlineCode.map((s) => (lines[s.line] ?? '').slice(s.startCol, s.endCol));
 }
 
-describe('inline code spans (06 §2.5)', () => {
+describe('inline code spans', () => {
   it('one span, backticks included', () => {
     assert.deepEqual(spans('Use `θ₀` as the initial value.'), ['`θ₀`']);
   });
@@ -61,7 +61,7 @@ describe('inline code spans (06 §2.5)', () => {
   });
 });
 
-describe('inline code spans: block structure mirrors the grammar (04 §5)', () => {
+describe('inline code spans: block structure mirrors the grammar', () => {
   it('list items and their indented continuation lines are prose', () => {
     assert.deepEqual(spans('- `a`: item\n    continued `b`\n  1. nested `c`'), ['`a`', '`b`', '`c`']);
   });

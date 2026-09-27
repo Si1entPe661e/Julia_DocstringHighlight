@@ -1,4 +1,4 @@
-// Integration tests in the Extension Host (06 §4). Decorations cannot be read back through the API,
+// Integration tests in the Extension Host. Decorations cannot be read back through the API,
 // so the hidden command juliaDocstringHighlight.debug.getRegions reports what was applied.
 import * as assert from 'node:assert/strict';
 import * as path from 'node:path';
@@ -45,7 +45,7 @@ async function setSetting(key: string, value: boolean | undefined): Promise<void
   await vscode.workspace.getConfiguration(SECTION).update(key, value, vscode.ConfigurationTarget.Global);
 }
 
-describe('extension (06 §4)', function () {
+describe('extension', function () {
   this.timeout(20000);
 
   before(async () => {

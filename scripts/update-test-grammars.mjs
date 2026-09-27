@@ -1,4 +1,4 @@
-// Refreshes the grammar copies used by the grammar snapshot tests (06 §3.1) from local installations
+// Refreshes the grammar copies used by the grammar snapshot tests from local installations
 // and records where they came from. The copies are MIT licensed, live in test/grammars/ only and are
 // never packaged (.vscodeignore excludes test/).
 //
@@ -82,7 +82,7 @@ const sources = {
     extension: `${juliaPackage.publisher}.${juliaPackage.name}`,
     version: juliaPackage.version,
     // Every grammar the official extension registers: the grammar tests check that none of them
-    // injects into docstrings as well (07 §9, "double injection").
+    // injects into docstrings as well, which would compete with this extension's injection.
     contributedGrammars: juliaPackage.contributes?.grammars ?? [],
   },
   markdown: {

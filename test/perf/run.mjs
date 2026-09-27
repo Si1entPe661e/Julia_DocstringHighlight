@@ -1,4 +1,4 @@
-// Detector performance budget (06 §6). Run with `npm run perf` (compiles the tests first).
+// Detector performance budget. Run with `npm run perf` (compiles the tests first).
 //
 // Generates Julia files of 10k and 50k lines (one docstring with heading / list / fence / inline code
 // per ~24 lines, plus ordinary functions and multi-line strings), then measures scan() after warm-up.
@@ -16,7 +16,7 @@ const { scan } = require(path.join(root, 'out/src/detector/index.js'));
 
 const FENCE = '```';
 
-/** About 24 lines and 1 KB (≈ 40 characters per line, so 50k lines ≈ 2 MB as assumed in 03 §7). */
+/** About 24 lines and 1 KB (≈ 40 characters per line, so 50k lines ≈ 2 MB). */
 function block(i) {
   return [
     '"""',

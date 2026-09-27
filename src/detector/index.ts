@@ -1,4 +1,4 @@
-// Layer 1 entry point: text → ScanResult. Pure; no dependency on vscode (02 §4).
+// Layer 1 entry point: text → ScanResult. Pure; no dependency on vscode.
 
 import { findDocstrings } from './docstrings';
 import { extractInlineCode, lineOf } from './inlineCode';

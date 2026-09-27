@@ -1,4 +1,4 @@
-# None of the strings in this file are docstrings (06 §2.3).
+# None of the strings in this file are docstrings.
 
 x = """plain"""
 

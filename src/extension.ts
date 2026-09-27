@@ -1,4 +1,4 @@
-// Activation and wiring only (02 §4, §5): modules are assembled here and every Disposable goes into
+// Activation and wiring only: modules are assembled here and every Disposable goes into
 // context.subscriptions. Layer 3 (the injection grammar) is static and needs no code.
 import * as vscode from 'vscode';
 import { onDidChangeSettings, readSettings } from './configuration';

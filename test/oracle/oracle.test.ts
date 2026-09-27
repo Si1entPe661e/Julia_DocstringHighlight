@@ -1,4 +1,4 @@
-// Cross-validation with the Julia parser (06 §5). Runs only when a `julia` executable is available
+// Cross-validation with the Julia parser. Runs only when a `julia` executable is available
 // (override with JULIA=/path/to/julia); run it with `npm run test:oracle`. With ORACLE_REQUIRED=1, as
 // in the release checks, a Julia that cannot run fails the suite instead of skipping it.
 import * as assert from 'node:assert/strict';
@@ -16,7 +16,7 @@ function juliaUnavailable(): string | undefined {
   return r.error?.message ?? (r.stderr.trim() || `exit status ${String(r.status)}`);
 }
 
-describe('Julia parser oracle (06 §5)', function () {
+describe('Julia parser oracle', function () {
   let oracle: Record<string, number[]> = {};
 
   before(function () {
