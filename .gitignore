@@ -4,3 +4,6 @@ out/
 .vscode-test/
 *.vsix
 .DS_Store
+# Kept locally, not in the repository: design notes and theme-check screenshots
+docs/
+images/themes/

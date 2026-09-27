@@ -94,8 +94,6 @@ Three independent layers:
 2. **Decoration:** three decoration types (background, guide, inline code chip) whose colors are `ThemeColor` references to the slots above.
 3. **Inner highlighting:** a TextMate grammar injected into `string.docstring.julia`, the scope that the Julia grammar already gives docstrings. It adds Markdown and Julia scopes inside and is guarded so that an unclosed code fence or quote in an example can never leak into the code after the docstring.
 
-The design documents are in [`docs/`](docs/README.md).
-
 ## Development
 
 ```bash
