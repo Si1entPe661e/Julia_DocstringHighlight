@@ -1,9 +1,9 @@
 >"""
-#^^^ source.julia string.docstring.julia punctuation.definition.string.begin.julia
+#^^^ source.julia embed.docstring.julia string.docstring.julia punctuation.definition.string.begin.julia
 >Docs.
-#^^^^^ source.julia string.docstring.julia text.docstring.julia
+#^^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown
 >"""
-#^^^ source.julia string.docstring.julia punctuation.definition.string.end.julia
+#^^^ source.julia embed.docstring.julia string.docstring.julia punctuation.definition.string.end.julia
 >function foo()
 #^^^^^^^^ source.julia keyword.other.julia
 #        ^ source.julia

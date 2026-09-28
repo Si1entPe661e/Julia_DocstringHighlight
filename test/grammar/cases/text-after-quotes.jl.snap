@@ -1,0 +1,70 @@
+>"""Starts on the opening line, with `code`.
+#^^^ source.julia embed.docstring.julia string.docstring.julia punctuation.definition.string.begin.julia
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown
+#                                    ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown markup.inline.raw.string.markdown punctuation.definition.raw.markdown
+#                                     ^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown markup.inline.raw.string.markdown
+#                                         ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown markup.inline.raw.string.markdown punctuation.definition.raw.markdown
+#                                          ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown
+>
+># Heading
+#^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia markup.heading.markdown heading.1.markdown punctuation.definition.heading.markdown
+# ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia markup.heading.markdown heading.1.markdown
+#  ^^^^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia markup.heading.markdown heading.1.markdown entity.name.section.markdown
+>"""
+#^^^ source.julia embed.docstring.julia string.docstring.julia punctuation.definition.string.end.julia
+>a(x) = x
+#^ source.julia entity.name.function.julia
+# ^ source.julia meta.bracket.julia
+#  ^ source.julia
+#   ^ source.julia meta.bracket.julia
+#    ^ source.julia
+#     ^ source.julia keyword.operator.update.julia
+#      ^^ source.julia
+>"""One line with `code`."""
+#^^^ source.julia embed.docstring.julia string.docstring.julia punctuation.definition.string.begin.julia
+#   ^^^^^^^^^^^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown
+#                 ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown markup.inline.raw.string.markdown punctuation.definition.raw.markdown
+#                  ^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown markup.inline.raw.string.markdown
+#                      ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown markup.inline.raw.string.markdown punctuation.definition.raw.markdown
+#                       ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown
+#                        ^^^ source.julia embed.docstring.julia string.docstring.julia punctuation.definition.string.end.julia
+>b(x) = x
+#^ source.julia entity.name.function.julia
+# ^ source.julia meta.bracket.julia
+#  ^ source.julia
+#   ^ source.julia meta.bracket.julia
+#    ^ source.julia
+#     ^ source.julia keyword.operator.update.julia
+#      ^^ source.julia
+>"""One line.""" # with a comment
+#^^^ source.julia embed.docstring.julia string.docstring.julia punctuation.definition.string.begin.julia
+#   ^^^^^^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown
+#            ^^^ source.julia embed.docstring.julia string.docstring.julia punctuation.definition.string.end.julia
+#               ^ source.julia
+#                ^ source.julia comment.line.number-sign.julia punctuation.definition.comment.julia
+#                 ^^^^^^^^^^^^^^^ source.julia comment.line.number-sign.julia
+>c(x) = x
+#^ source.julia entity.name.function.julia
+# ^ source.julia meta.bracket.julia
+#  ^ source.julia
+#   ^ source.julia meta.bracket.julia
+#    ^ source.julia
+#     ^ source.julia keyword.operator.update.julia
+#      ^^ source.julia
+>"""not a docstring""" * suffix
+#^^^ source.julia string.quoted.triple.double.julia punctuation.definition.string.multiline.begin.julia
+#   ^^^^^^^^^^^^^^^ source.julia string.quoted.triple.double.julia
+#                  ^^^ source.julia string.quoted.triple.double.julia punctuation.definition.string.multiline.end.julia
+#                     ^ source.julia
+#                      ^ source.julia keyword.operator.arithmetic.julia
+#                       ^^^^^^^ source.julia
+>d = """text
+#^^ source.julia
+#  ^ source.julia keyword.operator.update.julia
+#   ^ source.julia
+#    ^^^ source.julia string.quoted.triple.double.julia punctuation.definition.string.multiline.begin.julia
+#       ^^^^ source.julia string.quoted.triple.double.julia
+>continues"""
+#^^^^^^^^^ source.julia string.quoted.triple.double.julia
+#         ^^^ source.julia string.quoted.triple.double.julia punctuation.definition.string.multiline.end.julia
+>

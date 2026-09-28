@@ -1,0 +1,88 @@
+>@doc raw"""
+#^^^^ source.julia embed.docstring.raw.julia string.docstring.julia support.function.macro.julia
+#    ^ source.julia embed.docstring.raw.julia string.docstring.julia
+#     ^^^ source.julia embed.docstring.raw.julia string.docstring.julia support.function.macro.julia
+#        ^^^ source.julia embed.docstring.raw.julia string.docstring.julia punctuation.definition.string.begin.julia
+>    kl(p, q)
+#^^^^ source.julia embed.docstring.raw.julia
+#    ^^ source.julia embed.docstring.raw.julia support.function.julia
+#      ^ source.julia embed.docstring.raw.julia meta.bracket.julia
+#       ^ source.julia embed.docstring.raw.julia
+#        ^ source.julia embed.docstring.raw.julia punctuation.separator.comma.julia
+#         ^^ source.julia embed.docstring.raw.julia
+#           ^ source.julia embed.docstring.raw.julia meta.bracket.julia
+>
+>The divergence ``\sum_i p_i \log(p_i / q_i)`` costs $x$ and \$ dollars.
+#^^^^^^^^^^^^^^^ source.julia embed.docstring.raw.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown
+#               ^^ source.julia embed.docstring.raw.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown markup.inline.raw.string.markdown punctuation.definition.raw.markdown
+#                 ^^^^^^^^^^^^^^^^^^^^^^^^^^ source.julia embed.docstring.raw.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown markup.inline.raw.string.markdown
+#                                           ^^ source.julia embed.docstring.raw.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown markup.inline.raw.string.markdown punctuation.definition.raw.markdown
+#                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^ source.julia embed.docstring.raw.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown
+>
+>```jldoctest
+#^^^ source.julia embed.docstring.raw.julia text.html.markdown embed.docstring.string.julia markup.fenced_code.block.markdown punctuation.definition.markdown
+#   ^^^^^^^^^ source.julia embed.docstring.raw.julia text.html.markdown embed.docstring.string.julia markup.fenced_code.block.markdown fenced_code.block.language.markdown
+>julia> kl([0.5, 0.5], [0.5, 0.5])
+#^^^^^^ source.julia embed.docstring.raw.julia punctuation.definition.prompt.julia-repl
+#      ^ source.julia embed.docstring.raw.julia
+#       ^^ source.julia embed.docstring.raw.julia support.function.julia
+#         ^ source.julia embed.docstring.raw.julia meta.bracket.julia
+#          ^ source.julia embed.docstring.raw.julia meta.array.julia meta.bracket.julia
+#           ^^^ source.julia embed.docstring.raw.julia meta.array.julia constant.numeric.julia
+#              ^ source.julia embed.docstring.raw.julia meta.array.julia punctuation.separator.comma.julia
+#               ^ source.julia embed.docstring.raw.julia meta.array.julia
+#                ^^^ source.julia embed.docstring.raw.julia meta.array.julia constant.numeric.julia
+#                   ^ source.julia embed.docstring.raw.julia meta.array.julia meta.bracket.julia
+#                    ^ source.julia embed.docstring.raw.julia punctuation.separator.comma.julia
+#                     ^ source.julia embed.docstring.raw.julia
+#                      ^ source.julia embed.docstring.raw.julia meta.array.julia meta.bracket.julia
+#                       ^^^ source.julia embed.docstring.raw.julia meta.array.julia constant.numeric.julia
+#                          ^ source.julia embed.docstring.raw.julia meta.array.julia punctuation.separator.comma.julia
+#                           ^ source.julia embed.docstring.raw.julia meta.array.julia
+#                            ^^^ source.julia embed.docstring.raw.julia meta.array.julia constant.numeric.julia
+#                               ^ source.julia embed.docstring.raw.julia meta.array.julia meta.bracket.julia
+#                                ^ source.julia embed.docstring.raw.julia meta.bracket.julia
+>0.0
+#^^^ source.julia embed.docstring.raw.julia constant.numeric.julia
+>```
+#^^^ source.julia embed.docstring.raw.julia text.html.markdown embed.docstring.string.julia markup.fenced_code.block.markdown punctuation.definition.markdown
+>"""
+#^^^ source.julia embed.docstring.raw.julia string.docstring.julia punctuation.definition.string.end.julia
+>kl(p, q) = sum(p .* log.(p ./ q))
+#^^ source.julia entity.name.function.julia
+#  ^ source.julia meta.bracket.julia
+#   ^ source.julia
+#    ^ source.julia punctuation.separator.comma.julia
+#     ^^ source.julia
+#       ^ source.julia meta.bracket.julia
+#        ^ source.julia
+#         ^ source.julia keyword.operator.update.julia
+#          ^ source.julia
+#           ^^^ source.julia support.function.julia
+#              ^ source.julia meta.bracket.julia
+#               ^^ source.julia
+#                 ^^ source.julia keyword.operator.arithmetic.julia
+#                   ^ source.julia
+#                    ^^^ source.julia support.function.julia
+#                       ^ source.julia
+#                        ^ source.julia meta.bracket.julia
+#                         ^^ source.julia
+#                           ^^ source.julia keyword.operator.arithmetic.julia
+#                             ^^ source.julia
+#                               ^ source.julia meta.bracket.julia
+#                                ^ source.julia meta.bracket.julia
+>@doc raw"""Escaped \""" quotes stay inside; \alpha is literal.""" g
+#^^^^ source.julia embed.docstring.raw.julia string.docstring.julia support.function.macro.julia
+#    ^ source.julia embed.docstring.raw.julia string.docstring.julia
+#     ^^^ source.julia embed.docstring.raw.julia string.docstring.julia support.function.macro.julia
+#        ^^^ source.julia embed.docstring.raw.julia string.docstring.julia punctuation.definition.string.begin.julia
+#           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.julia embed.docstring.raw.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown
+#                                                              ^^^ source.julia embed.docstring.raw.julia string.docstring.julia punctuation.definition.string.end.julia
+#                                                                 ^ source.julia embed.docstring.raw.julia string.docstring.julia
+#                                                                  ^ source.julia
+>w = 1
+#^^ source.julia
+#  ^ source.julia keyword.operator.update.julia
+#   ^ source.julia
+#    ^ source.julia constant.numeric.julia
+>

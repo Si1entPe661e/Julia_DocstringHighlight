@@ -1,21 +1,21 @@
 >"""
-#^^^ source.julia string.docstring.julia punctuation.definition.string.begin.julia
+#^^^ source.julia embed.docstring.julia string.docstring.julia punctuation.definition.string.begin.julia
 >```
-#^^^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown punctuation.definition.markdown
+#^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia markup.fenced_code.block.markdown punctuation.definition.markdown
 >θ̂ = optimize(f, θ₀)
-#^^^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown meta.embedded.block.julia
-#   ^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown meta.embedded.block.julia keyword.operator.update.julia
-#    ^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown meta.embedded.block.julia
-#     ^^^^^^^^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown meta.embedded.block.julia support.function.julia
-#             ^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown meta.embedded.block.julia meta.bracket.julia
-#              ^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown meta.embedded.block.julia
-#               ^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown meta.embedded.block.julia punctuation.separator.comma.julia
-#                ^^^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown meta.embedded.block.julia
-#                   ^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown meta.embedded.block.julia meta.bracket.julia
+#^^^ source.julia embed.docstring.julia
+#   ^ source.julia embed.docstring.julia keyword.operator.update.julia
+#    ^ source.julia embed.docstring.julia
+#     ^^^^^^^^ source.julia embed.docstring.julia support.function.julia
+#             ^ source.julia embed.docstring.julia meta.bracket.julia
+#              ^ source.julia embed.docstring.julia
+#               ^ source.julia embed.docstring.julia punctuation.separator.comma.julia
+#                ^^^ source.julia embed.docstring.julia
+#                   ^ source.julia embed.docstring.julia meta.bracket.julia
 >```
-#^^^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown punctuation.definition.markdown
+#^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia markup.fenced_code.block.markdown punctuation.definition.markdown
 >"""
-#^^^ source.julia string.docstring.julia punctuation.definition.string.end.julia
+#^^^ source.julia embed.docstring.julia string.docstring.julia punctuation.definition.string.end.julia
 >fence_unlabelled(x) = x
 #^^^^^^^^^^^^^^^^ source.julia entity.name.function.julia
 #                ^ source.julia meta.bracket.julia

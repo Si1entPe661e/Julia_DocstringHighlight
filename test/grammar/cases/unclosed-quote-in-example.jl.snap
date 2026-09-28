@@ -1,20 +1,20 @@
 >"""
-#^^^ source.julia string.docstring.julia punctuation.definition.string.begin.julia
+#^^^ source.julia embed.docstring.julia string.docstring.julia punctuation.definition.string.begin.julia
 >```julia
-#^^^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown punctuation.definition.markdown
-#   ^^^^^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown fenced_code.block.language.markdown
+#^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia markup.fenced_code.block.markdown punctuation.definition.markdown
+#   ^^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia markup.fenced_code.block.markdown fenced_code.block.language.markdown
 >x = "abc
-#^^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown meta.embedded.block.julia
-#  ^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown meta.embedded.block.julia keyword.operator.update.julia
-#   ^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown meta.embedded.block.julia
-#    ^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown meta.embedded.block.julia string.quoted.double.julia punctuation.definition.string.begin.julia
-#     ^^^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown meta.embedded.block.julia string.quoted.double.julia
+#^^ source.julia embed.docstring.julia
+#  ^ source.julia embed.docstring.julia keyword.operator.update.julia
+#   ^ source.julia embed.docstring.julia
+#    ^ source.julia embed.docstring.julia string.quoted.double.julia punctuation.definition.string.begin.julia
+#     ^^^ source.julia embed.docstring.julia string.quoted.double.julia
 >```
-#^^^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown punctuation.definition.markdown
+#^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia markup.fenced_code.block.markdown punctuation.definition.markdown
 >After fence.
-#^^^^^^^^^^^^ source.julia string.docstring.julia text.docstring.julia
+#^^^^^^^^^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown
 >"""
-#^^^ source.julia string.docstring.julia punctuation.definition.string.end.julia
+#^^^ source.julia embed.docstring.julia string.docstring.julia punctuation.definition.string.end.julia
 >z = 1
 #^^ source.julia
 #  ^ source.julia keyword.operator.update.julia

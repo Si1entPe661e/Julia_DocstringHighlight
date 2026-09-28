@@ -1,33 +1,33 @@
 >"""
-#^^^ source.julia string.docstring.julia punctuation.definition.string.begin.julia
+#^^^ source.julia embed.docstring.julia string.docstring.julia punctuation.definition.string.begin.julia
 >    escape_interp(x)
-#^^^^ source.julia string.docstring.julia text.docstring.julia markup.raw.block.markdown
-#    ^^^^^^^^^^^^^ source.julia string.docstring.julia text.docstring.julia markup.raw.block.markdown meta.embedded.block.julia support.function.julia
-#                 ^ source.julia string.docstring.julia text.docstring.julia markup.raw.block.markdown meta.embedded.block.julia meta.bracket.julia
-#                  ^ source.julia string.docstring.julia text.docstring.julia markup.raw.block.markdown meta.embedded.block.julia
-#                   ^ source.julia string.docstring.julia text.docstring.julia markup.raw.block.markdown meta.embedded.block.julia meta.bracket.julia
+#^^^^ source.julia embed.docstring.julia
+#    ^^^^^^^^^^^^^ source.julia embed.docstring.julia support.function.julia
+#                 ^ source.julia embed.docstring.julia meta.bracket.julia
+#                  ^ source.julia embed.docstring.julia
+#                   ^ source.julia embed.docstring.julia meta.bracket.julia
 >
 >$(SIGNATURES)
-#^ source.julia string.docstring.julia text.docstring.julia variable.interpolation.julia
-# ^ source.julia string.docstring.julia text.docstring.julia variable.interpolation.julia meta.bracket.julia
-#  ^^^^^^^^^^ source.julia string.docstring.julia text.docstring.julia variable.interpolation.julia
-#            ^ source.julia string.docstring.julia text.docstring.julia variable.interpolation.julia meta.bracket.julia
+#^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown variable.interpolation.julia
+# ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown variable.interpolation.julia meta.bracket.julia
+#  ^^^^^^^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown variable.interpolation.julia
+#            ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown variable.interpolation.julia meta.bracket.julia
 >
 >A newline escape \n, a dollar \$ sign, interpolation $(x) and $x.
-#^^^^^^^^^^^^^^^^^ source.julia string.docstring.julia text.docstring.julia
-#                 ^^ source.julia string.docstring.julia text.docstring.julia constant.character.escape.julia
-#                   ^^^^^^^^^^^ source.julia string.docstring.julia text.docstring.julia
-#                              ^^ source.julia string.docstring.julia text.docstring.julia constant.character.escape.julia
-#                                ^^^^^^^^^^^^^^^^^^^^^ source.julia string.docstring.julia text.docstring.julia
-#                                                     ^ source.julia string.docstring.julia text.docstring.julia variable.interpolation.julia
-#                                                      ^ source.julia string.docstring.julia text.docstring.julia variable.interpolation.julia meta.bracket.julia
-#                                                       ^ source.julia string.docstring.julia text.docstring.julia variable.interpolation.julia
-#                                                        ^ source.julia string.docstring.julia text.docstring.julia variable.interpolation.julia meta.bracket.julia
-#                                                         ^^^^^ source.julia string.docstring.julia text.docstring.julia
-#                                                              ^^ source.julia string.docstring.julia text.docstring.julia variable.interpolation.julia
-#                                                                ^ source.julia string.docstring.julia text.docstring.julia
+#^^^^^^^^^^^^^^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown
+#                 ^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown constant.character.escape.julia
+#                   ^^^^^^^^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown
+#                              ^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown constant.character.escape.julia
+#                                ^^^^^^^^^^^^^^^^^^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown
+#                                                     ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown variable.interpolation.julia
+#                                                      ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown variable.interpolation.julia meta.bracket.julia
+#                                                       ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown variable.interpolation.julia
+#                                                        ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown variable.interpolation.julia meta.bracket.julia
+#                                                         ^^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown
+#                                                              ^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown variable.interpolation.julia
+#                                                                ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown
 >"""
-#^^^ source.julia string.docstring.julia punctuation.definition.string.end.julia
+#^^^ source.julia embed.docstring.julia string.docstring.julia punctuation.definition.string.end.julia
 >escape_interp(x) = x
 #^^^^^^^^^^^^^ source.julia entity.name.function.julia
 #             ^ source.julia meta.bracket.julia

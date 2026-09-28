@@ -20,7 +20,15 @@ const stable = process.env.VSCODE_TEST_STABLE ?? 'stable';
 const vsix = path.join(os.tmpdir(), `${manifest.name}-${manifest.version}-release-check.vsix`);
 
 /** Files that must be in the package, and paths that must not. */
-const REQUIRED = ['package.json', 'README.md', 'CHANGELOG.md', 'LICENSE', 'dist/extension.js', 'syntaxes/julia-docstring.injection.tmLanguage.json'];
+const REQUIRED = [
+  'package.json',
+  'README.md',
+  'CHANGELOG.md',
+  'LICENSE',
+  'dist/extension.js',
+  'syntaxes/julia-docstring.injection.tmLanguage.json',
+  'syntaxes/julia-docstring-escapes.injection.tmLanguage.json',
+];
 const FORBIDDEN = [/^(src|test|out|docs|scripts|node_modules|\.vscode(-test)?)\//, /\.(ts|map|vsix)$/];
 
 function run(title, args, env = {}, capture = false) {

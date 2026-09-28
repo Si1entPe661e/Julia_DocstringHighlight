@@ -1,0 +1,49 @@
+>@doc "Short `doc` with an escaped \" quote and $(x)." f
+#^^^^ source.julia embed.docstring.julia string.docstring.julia support.function.macro.julia
+#    ^ source.julia embed.docstring.julia string.docstring.julia
+#     ^ source.julia embed.docstring.julia string.docstring.julia punctuation.definition.string.begin.julia
+#      ^^^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown
+#            ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown markup.inline.raw.string.markdown punctuation.definition.raw.markdown
+#             ^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown markup.inline.raw.string.markdown
+#                ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown markup.inline.raw.string.markdown punctuation.definition.raw.markdown
+#                 ^^^^^^^^^^^^^^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown
+#                                  ^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown constant.character.escape.julia
+#                                    ^^^^^^^^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown
+#                                               ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown variable.interpolation.julia
+#                                                ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown variable.interpolation.julia meta.bracket.julia
+#                                                 ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown variable.interpolation.julia
+#                                                  ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown variable.interpolation.julia meta.bracket.julia
+#                                                   ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown
+#                                                    ^ source.julia embed.docstring.julia string.docstring.julia punctuation.definition.string.end.julia
+#                                                     ^ source.julia embed.docstring.julia string.docstring.julia
+#                                                      ^ source.julia
+>@doc "Two lines:
+#^^^^ source.julia embed.docstring.julia string.docstring.julia support.function.macro.julia
+#    ^ source.julia embed.docstring.julia string.docstring.julia
+#     ^ source.julia embed.docstring.julia string.docstring.julia punctuation.definition.string.begin.julia
+#      ^^^^^^^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown
+>- item `a`" g
+#^^^^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown
+#       ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown markup.inline.raw.string.markdown punctuation.definition.raw.markdown
+#        ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown markup.inline.raw.string.markdown
+#         ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown markup.inline.raw.string.markdown punctuation.definition.raw.markdown
+#          ^ source.julia embed.docstring.julia string.docstring.julia punctuation.definition.string.end.julia
+#           ^ source.julia embed.docstring.julia string.docstring.julia
+#            ^ source.julia
+>@doc raw"Raw $x$ and \alpha." h
+#^^^^ source.julia embed.docstring.raw.julia string.docstring.julia support.function.macro.julia
+#    ^ source.julia embed.docstring.raw.julia string.docstring.julia
+#     ^^^ source.julia embed.docstring.raw.julia string.docstring.julia support.function.macro.julia
+#        ^ source.julia embed.docstring.raw.julia string.docstring.julia punctuation.definition.string.begin.julia
+#         ^^^^^^^^^^^^^^^^^^^ source.julia embed.docstring.raw.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown
+#                            ^ source.julia embed.docstring.raw.julia string.docstring.julia punctuation.definition.string.end.julia
+#                             ^ source.julia embed.docstring.raw.julia string.docstring.julia
+#                              ^ source.julia
+>k = "plain"
+#^^ source.julia
+#  ^ source.julia keyword.operator.update.julia
+#   ^ source.julia
+#    ^ source.julia string.quoted.double.julia punctuation.definition.string.begin.julia
+#     ^^^^^ source.julia string.quoted.double.julia
+#          ^ source.julia string.quoted.double.julia punctuation.definition.string.end.julia
+>

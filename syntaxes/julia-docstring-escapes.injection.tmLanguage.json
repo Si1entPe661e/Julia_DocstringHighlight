@@ -1,0 +1,11 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Julia Docstring escapes (injection)",
+  "scopeName": "markdown.julia.docstring.escapes",
+  "comment": "Julia escapes and interpolation in the prose of docstrings (julia-docstring.injection.tmLanguage.json), but not in raw docstrings (embed.docstring.raw.julia), whose backslashes and dollar signs are literal. The prose rules are shared by both kinds of docstring; an injection is how patterns are added to them depending on where they are used.",
+  "injectionSelector": "L:embed.docstring.julia meta.paragraph.markdown -variable.interpolation",
+  "patterns": [
+    { "include": "source.julia#string_escaped_char" },
+    { "include": "source.julia#string_dollar_sign_interpolate" }
+  ]
+}

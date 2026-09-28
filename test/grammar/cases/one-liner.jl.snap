@@ -1,7 +1,10 @@
 >"""doc with `code`"""
-#^^^ source.julia string.quoted.triple.double.julia punctuation.definition.string.multiline.begin.julia
-#   ^^^^^^^^^^^^^^^ source.julia string.quoted.triple.double.julia
-#                  ^^^ source.julia string.quoted.triple.double.julia punctuation.definition.string.multiline.end.julia
+#^^^ source.julia embed.docstring.julia string.docstring.julia punctuation.definition.string.begin.julia
+#   ^^^^^^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown
+#            ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown markup.inline.raw.string.markdown punctuation.definition.raw.markdown
+#             ^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown markup.inline.raw.string.markdown
+#                 ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown markup.inline.raw.string.markdown punctuation.definition.raw.markdown
+#                  ^^^ source.julia embed.docstring.julia string.docstring.julia punctuation.definition.string.end.julia
 >h(x) = x
 #^ source.julia entity.name.function.julia
 # ^ source.julia meta.bracket.julia

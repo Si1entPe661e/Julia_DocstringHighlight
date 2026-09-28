@@ -45,29 +45,57 @@ function getOnigLib(): Promise<vsctm.IOnigLib> {
   return onigLib;
 }
 
-const grammars = new Map<boolean, Promise<vsctm.IGrammar>>();
+const grammars = new Map<string, Promise<vsctm.IGrammar>>();
 
-/** The `source.julia` grammar with or without this extension's injection. */
-export function loadJulia(withInjection: boolean): Promise<vsctm.IGrammar> {
-  let grammar = grammars.get(withInjection);
+function loadGrammar(scopeName: string, withInjection: boolean): Promise<vsctm.IGrammar> {
+  const key = `${scopeName} ${withInjection}`;
+  let grammar = grammars.get(key);
   if (grammar === undefined) {
     const { files, injections } = grammarSources();
     const registry = new vsctm.Registry({
       onigLib: getOnigLib(),
-      loadGrammar: async (scopeName) => {
-        const file = files.get(scopeName);
+      loadGrammar: async (name) => {
+        const file = files.get(name);
         // Other embedded languages (source.sql, source.cpp, text.html.derivative, …) are not needed.
         return file === undefined ? null : vsctm.parseRawGrammar(fs.readFileSync(file, 'utf8'), file);
       },
-      getInjections: (scopeName) => (withInjection ? injections.get(scopeName) : undefined),
+      getInjections: (name) => (withInjection ? injections.get(name) : undefined),
     });
-    grammar = registry.loadGrammar('source.julia').then((g) => {
-      if (g === null) throw new Error('source.julia grammar not found');
+    grammar = registry.loadGrammar(scopeName).then((g) => {
+      if (g === null) throw new Error(`${scopeName} grammar not found`);
       return g;
     });
-    grammars.set(withInjection, grammar);
+    grammars.set(key, grammar);
   }
   return grammar;
+}
+
+/** The `source.julia` grammar with or without this extension's injection. */
+export function loadJulia(withInjection: boolean): Promise<vsctm.IGrammar> {
+  return loadGrammar('source.julia', withInjection);
+}
+
+/** VS Code's Markdown grammar, for comparisons with a .md file. */
+export function loadMarkdown(): Promise<vsctm.IGrammar> {
+  return loadGrammar('text.html.markdown', false);
+}
+
+/** The editor's token types (vscode-textmate's StandardTokenType). */
+export const TokenType = { Other: 0, Comment: 1, String: 2, RegEx: 3 } as const;
+
+/** Token type per line and character, from the metadata of tokenizeLine2 (bits 8–9). */
+export function tokenTypes(grammar: vsctm.IGrammar, source: string): number[][] {
+  let state = vsctm.INITIAL;
+  return splitLines(source).map((text) => {
+    const { tokens, ruleStack } = grammar.tokenizeLine2(text, state);
+    state = ruleStack;
+    const types: number[] = [];
+    for (let i = 0; i < tokens.length; i += 2) {
+      const end = i + 2 < tokens.length ? (tokens[i + 2] ?? text.length) : text.length;
+      for (let c = tokens[i] ?? 0; c < end; c++) types[c] = ((tokens[i + 1] ?? 0) >>> 8) & 3;
+    }
+    return types;
+  });
 }
 
 export interface Token {

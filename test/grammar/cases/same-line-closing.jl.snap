@@ -1,10 +1,10 @@
 >"""
-#^^^ source.julia string.docstring.julia punctuation.definition.string.begin.julia
+#^^^ source.julia embed.docstring.julia string.docstring.julia punctuation.definition.string.begin.julia
 >First line.
-#^^^^^^^^^^^ source.julia string.docstring.julia text.docstring.julia
+#^^^^^^^^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown
 >Last line."""
-#^^^^^^^^^^ source.julia string.docstring.julia
-#          ^^^ source.julia string.docstring.julia punctuation.definition.string.end.julia
+#^^^^^^^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown
+#          ^^^ source.julia embed.docstring.julia string.docstring.julia punctuation.definition.string.end.julia
 >m(x) = x
 #^ source.julia entity.name.function.julia
 # ^ source.julia meta.bracket.julia

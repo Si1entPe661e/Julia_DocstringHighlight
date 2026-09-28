@@ -3,6 +3,22 @@
 All notable changes to this extension are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Changed
+
+- Every theme colors docstrings the way it colors Markdown and Julia: the text of a docstring is scoped like
+  a Markdown file and its signature and examples like Julia code, outside the string scope. Prose uses the
+  theme's Markdown text color instead of its string color; the quotes keep the string color. Signatures and
+  examples no longer take on the string color, or the color of Markdown code blocks, in themes such as GitHub,
+  Catppuccin or Atom One Dark, and headings, lists, links and inline code get the colors the theme gives them in
+  Markdown files.
+- To recolor docstring prose, use the scope `embed.docstring.julia meta.paragraph.markdown` (was
+  `text.docstring.julia`).
+- Markdown and Julia highlighting also covers `@doc raw"""…"""` (without escapes or interpolation, since
+  backslashes and dollar signs are literal there), `@doc "…"`, docstrings that start on the line of their
+  opening `"""`, one-line `"""…"""` docstrings, and the text before the closing quotes.
+
 ## [0.1.2] - 2026-09-27
 
 ### Changed

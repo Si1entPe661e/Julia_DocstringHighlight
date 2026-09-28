@@ -14,9 +14,9 @@ Subtle, theme-native highlighting for Julia docstrings in VS Code: a light docum
 ## What it does
 
 - **Documentation region.** Every docstring gets a very light whole-line background (about 3% opacity) and a 1px guide on the left edge, so you can see at a glance where documentation starts and ends. It never looks like a card and never outshines your code.
-- **Markdown structure.** Headings (`# Arguments`), lists, bold, italic, links, inline code and Documenter admonitions (`!!! note`) use your theme's Markdown colors. Inline code gets a faint background chip, because many themes color it exactly like strings.
-- **Real Julia inside.** The indented signature at the top of a docstring and fenced examples (unlabelled, `julia`, `jldoctest`, `julia-repl`, `@example`, `@repl`, `@setup`) are highlighted as Julia, with your theme's Julia colors. In `jldoctest` blocks the `julia>` prompt is marked separately. Other languages (`math`, `text`, …) stay plain.
-- **Regions only for real docstrings.** The background, guide and inline code chips follow the rules of Julia's own parser: `x = """…"""`, `println("""…""")`, strings separated from the next expression by a blank line or a comment line, bare `raw"…"` / `md"…"` strings and the like are left alone. The Markdown highlighting inside follows the Julia grammar's docstring rule instead (see [Known limitations](#known-limitations)).
+- **Markdown, in your theme's Markdown colors.** Prose, headings (`# Arguments`), lists, bold, italic, links and inline code look exactly as your theme shows them in a Markdown file, and Documenter admonitions (`!!! note`) like headings. Inline code also gets a faint background chip, so that it stands out in themes that give it no color of its own.
+- **Real Julia inside, in your theme's Julia colors.** The indented signature at the top of a docstring and fenced examples (unlabelled, `julia`, `jldoctest`, `julia-repl`, `@example`, `@repl`, `@setup`) are highlighted exactly like the Julia code around the docstring. In `jldoctest` blocks the `julia>` prompt is marked separately. Other languages (`math`, `text`, …) stay plain.
+- **Regions only for real docstrings.** The background, guide and inline code chips follow the rules of Julia's own parser: `x = """…"""`, `println("""…""")`, strings separated from the next expression by a blank line or a comment line, bare `raw"…"` / `md"…"` strings and the like are left alone. The Markdown and Julia highlighting inside applies to `@doc` docstrings and to docstrings whose opening `"""` is at the start of a line; without the parser, a grammar cannot tell a one-line `"…"` docstring or an indented `"""` from an ordinary string, so these keep the string color.
 
 ### What counts as a docstring
 
@@ -45,7 +45,7 @@ The Markdown and Julia highlighting inside docstrings comes from a TextMate gram
 
 ## Colors
 
-Colors are theme color slots, not settings, so each theme kind gets suitable defaults and switching themes needs no reload:
+The colors of the region, the guide and the inline code chip are theme color slots, not settings, so each theme kind gets suitable defaults and switching themes needs no reload:
 
 | Color | Dark | Light | High contrast |
 | --- | --- | --- | --- |
@@ -65,26 +65,17 @@ Override them in your settings, globally or per theme:
 }
 ```
 
-### Docstring prose color
+### Text and code colors
 
-A docstring is a string, and every theme colors strings, so prose inside docstrings keeps your theme's string color (orange in Dark+, red in Light+). Prose is marked with its own scope, `text.docstring.julia`, which you can recolor:
+The text of a docstring is scoped like a Markdown file and its code like Julia code, outside any string scope, so your theme colors both exactly as it colors Markdown and Julia; only the quotes keep the string color. To give the prose of docstrings a color of its own, for example your theme's string color:
 
 ```jsonc
 "editor.tokenColorCustomizations": {
   "textMateRules": [
-    { "scope": "text.docstring.julia", "settings": { "foreground": "#D4D4D4" } }
+    { "scope": "embed.docstring.julia meta.paragraph.markdown", "settings": { "foreground": "#CE9178" } }
   ]
 }
 ```
-
-## Known limitations
-
-1. **Prose uses the string color.** The alternative scope (`meta.embedded`) would give prose the default foreground but would also make VS Code treat it as code: completions pop up while you write documentation and brackets get colored. Use the customization above instead.
-2. **Markdown highlighting follows the Julia grammar's docstring rule.** It applies when the opening `"""` is on a line of its own, indented by at most one character, and to `@doc """` / `@doc doc"""`. Docstrings indented by two or more characters (for example inside an indented `module`), `@doc raw"""…"""`, one-line `"""…"""` and `"…"` docstrings get the region background and inline code chips, but no Markdown or Julia highlighting inside.
-3. The guide is drawn at the left edge of the text area and does not follow indentation; on indented lines it coincides with the first indentation guide.
-4. A docstring that you are still typing gets its background once you type the first character of the expression it documents. While a `"""` is unclosed, it pairs with the next `"""` in the file, exactly as Julia and the syntax highlighter see it.
-5. The inner highlighting cannot be switched off on its own (see [Settings](#settings)).
-6. Blocks are recognized by indentation while their `end` is still missing, so that the docstrings below a function or struct you are typing keep their region. As a consequence, a string statement in a function or `if` / `for` body that is *not indented* (level with the block's first line) is decorated, although Julia does not treat it as a docstring. Indented code, as written by every Julia formatter, is not affected.
 
 ## How it works
 
@@ -92,7 +83,7 @@ Three independent layers:
 
 1. **Detection:** a small, dependency-free lexical scanner finds docstrings with the rules of Julia's parser (JuliaSyntax): statement position, exactly one line break before the documented expression, block-closing keywords, `@doc` forms. It rescans a document 100 ms after you stop typing; a 50,000-line file takes about 8 ms on an Apple Silicon laptop.
 2. **Decoration:** three decoration types (background, guide, inline code chip) whose colors are `ThemeColor` references to the slots above.
-3. **Inner highlighting:** a TextMate grammar injected into `string.docstring.julia`, the scope that the Julia grammar already gives docstrings. It adds Markdown and Julia scopes inside and is guarded so that an unclosed code fence or quote in an example can never leak into the code after the docstring.
+3. **Inner highlighting:** a TextMate grammar injected into the Julia grammar. It takes over the Julia grammar's docstring rules and scopes the text like a Markdown file and the examples like Julia code, so every theme colors them as it colors Markdown and Julia; the quotes keep their string scope. It is guarded so that an unclosed code fence or quote in an example can never leak into the code after the docstring.
 
 ## Development
 

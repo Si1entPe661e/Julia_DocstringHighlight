@@ -1,27 +1,27 @@
 >"""
-#^^^ source.julia string.docstring.julia punctuation.definition.string.begin.julia
+#^^^ source.julia embed.docstring.julia string.docstring.julia punctuation.definition.string.begin.julia
 >Use `θ₀` as the initial value, or ``\\alpha`` with double backticks.
-#^^^^ source.julia string.docstring.julia text.docstring.julia
-#    ^ source.julia string.docstring.julia text.docstring.julia markup.inline.raw.string.markdown punctuation.definition.raw.markdown
-#     ^^ source.julia string.docstring.julia text.docstring.julia markup.inline.raw.string.markdown
-#       ^ source.julia string.docstring.julia text.docstring.julia markup.inline.raw.string.markdown punctuation.definition.raw.markdown
-#        ^^^^^^^^^^^^^^^^^^^^^^^^^^ source.julia string.docstring.julia text.docstring.julia
-#                                  ^^ source.julia string.docstring.julia text.docstring.julia markup.inline.raw.string.markdown punctuation.definition.raw.markdown
-#                                    ^^^^^^^ source.julia string.docstring.julia text.docstring.julia markup.inline.raw.string.markdown
-#                                           ^^ source.julia string.docstring.julia text.docstring.julia markup.inline.raw.string.markdown punctuation.definition.raw.markdown
-#                                             ^^^^^^^^^^^^^^^^^^^^^^^ source.julia string.docstring.julia text.docstring.julia
+#^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown
+#    ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown markup.inline.raw.string.markdown punctuation.definition.raw.markdown
+#     ^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown markup.inline.raw.string.markdown
+#       ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown markup.inline.raw.string.markdown punctuation.definition.raw.markdown
+#        ^^^^^^^^^^^^^^^^^^^^^^^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown
+#                                  ^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown markup.inline.raw.string.markdown punctuation.definition.raw.markdown
+#                                    ^^^^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown markup.inline.raw.string.markdown
+#                                           ^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown markup.inline.raw.string.markdown punctuation.definition.raw.markdown
+#                                             ^^^^^^^^^^^^^^^^^^^^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown
 >Two spans: `a` and `b`; an unclosed `tick stays prose.
-#^^^^^^^^^^^ source.julia string.docstring.julia text.docstring.julia
-#           ^ source.julia string.docstring.julia text.docstring.julia markup.inline.raw.string.markdown punctuation.definition.raw.markdown
-#            ^ source.julia string.docstring.julia text.docstring.julia markup.inline.raw.string.markdown
-#             ^ source.julia string.docstring.julia text.docstring.julia markup.inline.raw.string.markdown punctuation.definition.raw.markdown
-#              ^^^^^ source.julia string.docstring.julia text.docstring.julia
-#                   ^ source.julia string.docstring.julia text.docstring.julia markup.inline.raw.string.markdown punctuation.definition.raw.markdown
-#                    ^ source.julia string.docstring.julia text.docstring.julia markup.inline.raw.string.markdown
-#                     ^ source.julia string.docstring.julia text.docstring.julia markup.inline.raw.string.markdown punctuation.definition.raw.markdown
-#                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.julia string.docstring.julia text.docstring.julia
+#^^^^^^^^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown
+#           ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown markup.inline.raw.string.markdown punctuation.definition.raw.markdown
+#            ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown markup.inline.raw.string.markdown
+#             ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown markup.inline.raw.string.markdown punctuation.definition.raw.markdown
+#              ^^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown
+#                   ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown markup.inline.raw.string.markdown punctuation.definition.raw.markdown
+#                    ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown markup.inline.raw.string.markdown
+#                     ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown markup.inline.raw.string.markdown punctuation.definition.raw.markdown
+#                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown
 >"""
-#^^^ source.julia string.docstring.julia punctuation.definition.string.end.julia
+#^^^ source.julia embed.docstring.julia string.docstring.julia punctuation.definition.string.end.julia
 >inline_code(x) = x
 #^^^^^^^^^^^ source.julia entity.name.function.julia
 #           ^ source.julia meta.bracket.julia

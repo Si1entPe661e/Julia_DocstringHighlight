@@ -1,28 +1,28 @@
 >"""
-#^^^ source.julia string.docstring.julia punctuation.definition.string.begin.julia
+#^^^ source.julia embed.docstring.julia string.docstring.julia punctuation.definition.string.begin.julia
 >!!! note "Title"
-#^^^ source.julia string.docstring.julia text.docstring.julia punctuation.definition.heading.markdown
-#   ^ source.julia string.docstring.julia text.docstring.julia
-#    ^^^^ source.julia string.docstring.julia text.docstring.julia markup.heading.markdown entity.name.section.markdown
-#        ^ source.julia string.docstring.julia text.docstring.julia
-#         ^^^^^^^ source.julia string.docstring.julia text.docstring.julia markup.heading.markdown
+#^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia punctuation.definition.heading.markdown
+#   ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia
+#    ^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia markup.heading.markdown entity.name.section.markdown
+#        ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia
+#         ^^^^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia markup.heading.markdown
 >    The body of the note with `code`.
-#^^^^ source.julia string.docstring.julia text.docstring.julia
-#    ^^^^^^^^^^^^^^^^^^^^^^^^^^ source.julia string.docstring.julia text.docstring.julia
-#                              ^ source.julia string.docstring.julia text.docstring.julia markup.inline.raw.string.markdown punctuation.definition.raw.markdown
-#                               ^^^^ source.julia string.docstring.julia text.docstring.julia markup.inline.raw.string.markdown
-#                                   ^ source.julia string.docstring.julia text.docstring.julia markup.inline.raw.string.markdown punctuation.definition.raw.markdown
-#                                    ^ source.julia string.docstring.julia text.docstring.julia
+#^^^^ source.julia embed.docstring.julia
+#    ^^^^^^^^^^^^^^^^^^^^^^^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown
+#                              ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown markup.inline.raw.string.markdown punctuation.definition.raw.markdown
+#                               ^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown markup.inline.raw.string.markdown
+#                                   ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown markup.inline.raw.string.markdown punctuation.definition.raw.markdown
+#                                    ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown
 >
 >!!! warning
-#^^^ source.julia string.docstring.julia text.docstring.julia punctuation.definition.heading.markdown
-#   ^ source.julia string.docstring.julia text.docstring.julia
-#    ^^^^^^^ source.julia string.docstring.julia text.docstring.julia markup.heading.markdown entity.name.section.markdown
+#^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia punctuation.definition.heading.markdown
+#   ^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia
+#    ^^^^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia markup.heading.markdown entity.name.section.markdown
 >    Another admonition.
-#^^^^ source.julia string.docstring.julia text.docstring.julia
-#    ^^^^^^^^^^^^^^^^^^^ source.julia string.docstring.julia text.docstring.julia
+#^^^^ source.julia embed.docstring.julia
+#    ^^^^^^^^^^^^^^^^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown
 >"""
-#^^^ source.julia string.docstring.julia punctuation.definition.string.end.julia
+#^^^ source.julia embed.docstring.julia string.docstring.julia punctuation.definition.string.end.julia
 >admonition(x) = x
 #^^^^^^^^^^ source.julia entity.name.function.julia
 #          ^ source.julia meta.bracket.julia

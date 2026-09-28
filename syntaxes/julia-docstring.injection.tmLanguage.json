@@ -2,63 +2,224 @@
   "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
   "name": "Julia Docstring (injection)",
   "scopeName": "markdown.julia.docstring",
-  "injectionSelector": "L:string.docstring.julia -text.docstring.julia",
+  "comment": "Takes over the two docstring rules of the Julia grammar (same begin and end), plus the unambiguous forms it leaves to its string rules, so that the content is not inside a string scope: Markdown gets the scopes of a Markdown file (text.html.markdown, meta.paragraph.markdown, …) and Julia code gets the scopes of Julia code, and every theme colors them like Markdown and Julia. embed.docstring.string.julia on the Markdown parts gives them the String token type (no completions, no bracket colors) without matching the themes' string rules. The embed root is not colored by themes (meta is, by some).",
+  "injectionSelector": "L:source.julia -string -comment -meta.embedded -embed -constant.other.symbol",
   "patterns": [
-    { "include": "#docstring-body" }
+    { "include": "#docstring-macro" },
+    { "include": "#docstring-macro-raw" },
+    { "include": "#docstring-macro-single" },
+    { "include": "#docstring" },
+    { "include": "#docstring-text" }
   ],
   "repository": {
-    "docstring-body": {
-      "comment": "Starts right after the host's opening quotes (\\G holds only at the end of the previous match). Continues line by line until a line contains an unescaped closing \"\"\"; that line is handed back to the host grammar. The guards scan from the start of the line (or the opening quotes) in steps of one character or one backslash escape, so the quotes in \\\"\"\" are escaped and those in \\\\\"\"\" close the string.",
+    "docstring-macro": {
+      "comment": "@doc \"\"\", @doc doc\"\"\" and doc\"\"\".",
+      "begin": "(?:(@doc)\\s((?:doc)?\"\"\")|(doc\"\"\"))",
+      "beginCaptures": {
+        "0": { "name": "string.docstring.julia" },
+        "1": { "name": "support.function.macro.julia" },
+        "2": { "name": "punctuation.definition.string.begin.julia" }
+      },
+      "end": "(\"\"\") ?(->)?",
+      "endCaptures": {
+        "0": { "name": "string.docstring.julia" },
+        "1": { "name": "punctuation.definition.string.end.julia" },
+        "2": { "name": "keyword.operator.arrow.julia" }
+      },
+      "name": "embed.docstring.julia",
+      "patterns": [
+        { "include": "#body" },
+        { "include": "#closing-line" }
+      ]
+    },
+    "docstring": {
+      "comment": "\"\"\" or doc\"\"\" on a line of its own, indented by at most one space.",
+      "begin": "^\\s?(doc)?(\"\"\")\\s?$",
+      "beginCaptures": {
+        "0": { "name": "string.docstring.julia" },
+        "1": { "name": "support.function.macro.julia" },
+        "2": { "name": "punctuation.definition.string.begin.julia" }
+      },
+      "end": "(\"\"\")",
+      "endCaptures": {
+        "0": { "name": "string.docstring.julia" },
+        "1": { "name": "punctuation.definition.string.end.julia" }
+      },
+      "name": "embed.docstring.julia",
+      "patterns": [
+        { "include": "#body" },
+        { "include": "#closing-line" }
+      ]
+    },
+    "docstring-macro-raw": {
+      "comment": "@doc raw\"\"\": backslashes and dollar signs are literal, so there are no escapes or interpolation (see the escapes grammar); only the quotes after an odd number of backslashes are escaped, as in any string.",
+      "begin": "(@doc)\\s+(raw)(\"\"\")",
+      "beginCaptures": {
+        "0": { "name": "string.docstring.julia" },
+        "1": { "name": "support.function.macro.julia" },
+        "2": { "name": "support.function.macro.julia" },
+        "3": { "name": "punctuation.definition.string.begin.julia" }
+      },
+      "end": "(\"\"\") ?(->)?",
+      "endCaptures": {
+        "0": { "name": "string.docstring.julia" },
+        "1": { "name": "punctuation.definition.string.end.julia" },
+        "2": { "name": "keyword.operator.arrow.julia" }
+      },
+      "name": "embed.docstring.raw.julia",
+      "patterns": [
+        { "include": "#body" },
+        { "include": "#closing-line" }
+      ]
+    },
+    "docstring-macro-single": {
+      "comment": "@doc \"…\" and @doc raw\"…\".",
+      "patterns": [
+        {
+          "begin": "(@doc)\\s+(\")(?!\"\")",
+          "beginCaptures": {
+            "0": { "name": "string.docstring.julia" },
+            "1": { "name": "support.function.macro.julia" },
+            "2": { "name": "punctuation.definition.string.begin.julia" }
+          },
+          "end": "(\") ?(->)?",
+          "endCaptures": {
+            "0": { "name": "string.docstring.julia" },
+            "1": { "name": "punctuation.definition.string.end.julia" },
+            "2": { "name": "keyword.operator.arrow.julia" }
+          },
+          "name": "embed.docstring.julia",
+          "patterns": [
+            { "include": "#body-single" },
+            { "include": "#closing-line-single" }
+          ]
+        },
+        {
+          "begin": "(@doc)\\s+(raw)(\")(?!\"\")",
+          "beginCaptures": {
+            "0": { "name": "string.docstring.julia" },
+            "1": { "name": "support.function.macro.julia" },
+            "2": { "name": "support.function.macro.julia" },
+            "3": { "name": "punctuation.definition.string.begin.julia" }
+          },
+          "end": "(\") ?(->)?",
+          "endCaptures": {
+            "0": { "name": "string.docstring.julia" },
+            "1": { "name": "punctuation.definition.string.end.julia" },
+            "2": { "name": "keyword.operator.arrow.julia" }
+          },
+          "name": "embed.docstring.raw.julia",
+          "patterns": [
+            { "include": "#body-single" },
+            { "include": "#closing-line-single" }
+          ]
+        }
+      ]
+    },
+    "docstring-text": {
+      "comment": "\"\"\" at the start of a line followed by text, which the Julia grammar leaves to its string rules: a docstring that starts on the line of its opening quotes, or a one-line docstring with nothing but a comment after it. The closing quotes are the first unescaped \"\"\" on the line.",
+      "begin": "^\\s?(\"\"\")(?=\\s*\\S)(?=(?:[^\\\\\"]|\\\\.|\"(?!\"\"))*\"\"\"\\s*(?:#.*)?$|(?!(?:[^\\\\]|\\\\.)*\"\"\"))",
+      "beginCaptures": {
+        "0": { "name": "string.docstring.julia" },
+        "1": { "name": "punctuation.definition.string.begin.julia" }
+      },
+      "end": "(\"\"\")",
+      "endCaptures": {
+        "0": { "name": "string.docstring.julia" },
+        "1": { "name": "punctuation.definition.string.end.julia" }
+      },
+      "name": "embed.docstring.julia",
+      "patterns": [
+        { "include": "#body" },
+        { "include": "#closing-line" }
+      ]
+    },
+    "body": {
+      "comment": "Starts right after the opening quotes (\\G holds only at the end of the previous match). Continues line by line until a line contains an unescaped closing \"\"\"; that line is left to #closing-line and the end of the docstring rule. The guards scan from the start of the line (or the opening quotes) in steps of one character or one backslash escape, so the quotes in \\\"\"\" are escaped and those in \\\\\"\"\" close the string.",
       "begin": "\\G(?!(?:[^\\\\]|\\\\.)*\"\"\")",
       "while": "^(?!(?:[^\\\\]|\\\\.)*\"\"\")",
-      "contentName": "text.docstring.julia",
+      "patterns": [{ "include": "#blocks" }]
+    },
+    "body-single": {
+      "comment": "#body for a docstring in single quotes: it ends at the first unescaped quote.",
+      "begin": "\\G(?!(?:[^\\\\\"]|\\\\.)*\")",
+      "while": "^(?!(?:[^\\\\\"]|\\\\.)*\")",
+      "patterns": [{ "include": "#blocks" }]
+    },
+    "blocks": {
       "patterns": [
         { "include": "#fenced-julia" },
         { "include": "#fenced-other" },
         { "include": "#indented-code" },
         { "include": "#admonition" },
-        { "include": "#list-unordered" },
-        { "include": "#list-ordered" },
-        { "include": "text.html.markdown#heading" },
-        { "include": "source.julia#string_escaped_char" },
-        { "include": "source.julia#string_dollar_sign_interpolate" },
-        { "include": "text.html.markdown#inline" }
+        { "include": "#list" },
+        { "include": "#line" }
       ]
     },
-    "block-content": {
-      "comment": "Content allowed inside list items and admonition bodies. Relative indentation is handled by \\G after the enclosing while match.",
+    "closing-line": {
+      "comment": "Text before the closing quotes, on the last line or on the opening line of a one-line docstring. It is matched up to the first unescaped quotes, so the Markdown rules applied to it cannot run past them.",
+      "match": "(?:^|\\G)((?:[^\\\\]|\\\\.)+?)(?=\"\"\")",
+      "captures": {
+        "1": {
+          "name": "text.html.markdown embed.docstring.string.julia meta.paragraph.markdown",
+          "patterns": [{ "include": "#inline" }]
+        }
+      }
+    },
+    "closing-line-single": {
+      "match": "(?:^|\\G)((?:[^\\\\\"]|\\\\.)+)(?=\")",
+      "captures": {
+        "1": {
+          "name": "text.html.markdown embed.docstring.string.julia meta.paragraph.markdown",
+          "patterns": [{ "include": "#inline" }]
+        }
+      }
+    },
+    "line": {
+      "comment": "A heading or a paragraph line. Like a paragraph line of the Markdown grammar, it ends with its line.",
+      "begin": "(^|\\G)(?=[ ]{0,3}\\S)",
+      "while": "(?!)",
+      "name": "text.html.markdown embed.docstring.string.julia",
       "patterns": [
-        { "include": "#fenced-julia" },
-        { "include": "#fenced-other" },
-        { "include": "#list-unordered" },
-        { "include": "#list-ordered" },
-        { "include": "source.julia#string_escaped_char" },
-        { "include": "source.julia#string_dollar_sign_interpolate" },
-        { "include": "text.html.markdown#inline" }
+        { "include": "text.html.markdown#heading" },
+        { "include": "#paragraph" }
       ]
+    },
+    "paragraph": {
+      "begin": "(^|\\G)[ ]{0,3}(?=\\S)",
+      "while": "(?!)",
+      "name": "meta.paragraph.markdown",
+      "patterns": [{ "include": "#inline" }]
+    },
+    "inline": {
+      "comment": "Julia escapes and interpolation are added by julia-docstring-escapes.injection.tmLanguage.json, except in raw docstrings.",
+      "patterns": [{ "include": "text.html.markdown#inline" }]
     },
     "fenced-julia": {
-      "comment": "Unlabelled fences and Julia-family labels are highlighted as Julia.",
+      "comment": "Unlabelled fences and Julia-family labels are highlighted as Julia. Only the fence lines are Markdown; the code has no Markdown or string scope, so it gets the colors of the Julia code around the docstring.",
       "begin": "(^|\\G)(\\s*)(`{3,}|~{3,})\\s*(?i:(jldoctest|julia-repl|julia|jl|@example|@repl|@setup)\\b[^`]*)?$",
       "end": "(^|\\G)(\\2|\\s{0,3})(\\3)\\s*$",
-      "name": "markup.fenced_code.block.markdown",
       "beginCaptures": {
+        "0": { "name": "text.html.markdown embed.docstring.string.julia markup.fenced_code.block.markdown" },
         "3": { "name": "punctuation.definition.markdown" },
         "4": { "name": "fenced_code.block.language.markdown" }
       },
       "endCaptures": {
+        "0": { "name": "text.html.markdown embed.docstring.string.julia markup.fenced_code.block.markdown" },
         "3": { "name": "punctuation.definition.markdown" }
       },
       "patterns": [
         {
           "begin": "(^|\\G)(\\s*)(.*)",
           "while": "(^|\\G)(?!\\s*([`~]{3,})\\s*$)",
-          "contentName": "meta.embedded.block.julia",
-          "patterns": [
-            { "include": "#repl-prompt" },
-            { "include": "source.julia" }
-          ]
+          "patterns": [{ "include": "#julia-code" }]
         }
+      ]
+    },
+    "julia-code": {
+      "patterns": [
+        { "include": "#repl-prompt" },
+        { "include": "source.julia" }
       ]
     },
     "repl-prompt": {
@@ -68,69 +229,138 @@
       }
     },
     "fenced-other": {
-      "comment": "Fences with any other language label are plain text.",
+      "comment": "Fences with any other language label are plain text, like an unknown language in a Markdown file.",
       "begin": "(^|\\G)(\\s*)(`{3,}|~{3,})\\s*([^`\\s]+)[^`]*$",
       "end": "(^|\\G)(\\2|\\s{0,3})(\\3)\\s*$",
-      "name": "markup.fenced_code.block.markdown",
+      "name": "text.html.markdown embed.docstring.string.julia markup.fenced_code.block.markdown",
       "beginCaptures": {
         "3": { "name": "punctuation.definition.markdown" },
         "4": { "name": "fenced_code.block.language.markdown" }
       },
       "endCaptures": {
         "3": { "name": "punctuation.definition.markdown" }
-      },
-      "patterns": [
-        {
-          "begin": "(^|\\G)(\\s*)(.*)",
-          "while": "(^|\\G)(?!\\s*([`~]{3,})\\s*$)",
-          "contentName": "markup.raw.block.markdown"
-        }
-      ]
+      }
     },
     "indented-code": {
-      "comment": "Four-space / tab indented block: by Julia convention the signature at the top of a docstring.",
+      "comment": "Four-space / tab indented block: by Julia convention the signature at the top of a docstring. Julia code without Markdown or string scope, like #fenced-julia.",
       "begin": "(^|\\G)([ ]{4}|\\t)",
       "while": "(^|\\G)([ ]{4}|\\t)",
-      "name": "markup.raw.block.markdown",
-      "contentName": "meta.embedded.block.julia",
-      "patterns": [
-        { "include": "source.julia" }
-      ]
+      "patterns": [{ "include": "source.julia" }]
     },
     "admonition": {
-      "comment": "Documenter admonition: !!! note \"Title\" followed by a four-space indented body.",
+      "comment": "Documenter admonition: !!! note \"Title\" followed by a four-space indented body. The body has no scope of its own, so its content is scoped like the content of the docstring.",
       "begin": "(^|\\G)(!!!)[ \\t]+([A-Za-z]+)(?:[ \\t]+(\"[^\"]*\"))?[ \\t]*$",
       "while": "((^|\\G)([ ]{4}|\\t))|(^[ \\t]*$)",
       "beginCaptures": {
+        "0": { "name": "text.html.markdown embed.docstring.string.julia" },
         "2": { "name": "punctuation.definition.heading.markdown" },
         "3": { "name": "markup.heading.markdown entity.name.section.markdown" },
         "4": { "name": "markup.heading.markdown" }
       },
       "patterns": [
-        { "include": "#block-content" }
+        { "include": "#fenced-julia" },
+        { "include": "#fenced-other" },
+        { "include": "#list" },
+        { "include": "#line" }
       ]
     },
-    "list-unordered": {
-      "begin": "(^|\\G)([ ]{0,3})([*+-])([ \\t])",
-      "while": "((^|\\G)([ ]{2,4}|\\t))|(^[ \\t]*$)",
-      "name": "markup.list.unnumbered.markdown",
-      "beginCaptures": {
-        "3": { "name": "punctuation.definition.list.begin.markdown" }
-      },
+    "list": {
+      "comment": "A list and everything in it is Markdown, as in a Markdown file: its content is scoped by the #nested-* rules, which do not repeat text.html.markdown.",
       "patterns": [
-        { "include": "#block-content" }
+        {
+          "begin": "(^|\\G)([ ]{0,3})([*+-])([ \\t])",
+          "while": "((^|\\G)([ ]{2,4}|\\t))|(^[ \\t]*$)",
+          "name": "text.html.markdown markup.list.unnumbered.markdown",
+          "beginCaptures": {
+            "3": { "name": "embed.docstring.string.julia punctuation.definition.list.begin.markdown" }
+          },
+          "patterns": [{ "include": "#list-content" }]
+        },
+        {
+          "begin": "(^|\\G)([ ]{0,3})([0-9]+[.)])([ \\t])",
+          "while": "((^|\\G)([ ]{2,4}|\\t))|(^[ \\t]*$)",
+          "name": "text.html.markdown markup.list.numbered.markdown",
+          "beginCaptures": {
+            "3": { "name": "embed.docstring.string.julia punctuation.definition.list.begin.markdown" }
+          },
+          "patterns": [{ "include": "#list-content" }]
+        }
       ]
     },
-    "list-ordered": {
-      "begin": "(^|\\G)([ ]{0,3})([0-9]+[.)])([ \\t])",
-      "while": "((^|\\G)([ ]{2,4}|\\t))|(^[ \\t]*$)",
-      "name": "markup.list.numbered.markdown",
+    "list-content": {
+      "comment": "Relative indentation is handled by \\G after the enclosing while match.",
+      "patterns": [
+        { "include": "#nested-fenced-julia" },
+        { "include": "#nested-fenced-other" },
+        { "include": "#nested-list" },
+        { "include": "#nested-line" }
+      ]
+    },
+    "nested-list": {
+      "patterns": [
+        {
+          "begin": "(^|\\G)([ ]{0,3})([*+-])([ \\t])",
+          "while": "((^|\\G)([ ]{2,4}|\\t))|(^[ \\t]*$)",
+          "name": "markup.list.unnumbered.markdown",
+          "beginCaptures": {
+            "3": { "name": "embed.docstring.string.julia punctuation.definition.list.begin.markdown" }
+          },
+          "patterns": [{ "include": "#list-content" }]
+        },
+        {
+          "begin": "(^|\\G)([ ]{0,3})([0-9]+[.)])([ \\t])",
+          "while": "((^|\\G)([ ]{2,4}|\\t))|(^[ \\t]*$)",
+          "name": "markup.list.numbered.markdown",
+          "beginCaptures": {
+            "3": { "name": "embed.docstring.string.julia punctuation.definition.list.begin.markdown" }
+          },
+          "patterns": [{ "include": "#list-content" }]
+        }
+      ]
+    },
+    "nested-line": {
+      "begin": "(^|\\G)(?=[ ]{0,3}\\S)",
+      "while": "(?!)",
+      "name": "embed.docstring.string.julia",
+      "patterns": [
+        { "include": "text.html.markdown#heading" },
+        { "include": "#paragraph" }
+      ]
+    },
+    "nested-fenced-julia": {
+      "comment": "A Julia fence inside a list item, scoped like one in a Markdown file.",
+      "begin": "(^|\\G)(\\s*)(`{3,}|~{3,})\\s*(?i:(jldoctest|julia-repl|julia|jl|@example|@repl|@setup)\\b[^`]*)?$",
+      "end": "(^|\\G)(\\2|\\s{0,3})(\\3)\\s*$",
+      "name": "markup.fenced_code.block.markdown",
       "beginCaptures": {
-        "3": { "name": "punctuation.definition.list.begin.markdown" }
+        "0": { "name": "embed.docstring.string.julia" },
+        "3": { "name": "punctuation.definition.markdown" },
+        "4": { "name": "fenced_code.block.language.markdown" }
+      },
+      "endCaptures": {
+        "0": { "name": "embed.docstring.string.julia" },
+        "3": { "name": "punctuation.definition.markdown" }
       },
       "patterns": [
-        { "include": "#block-content" }
+        {
+          "begin": "(^|\\G)(\\s*)(.*)",
+          "while": "(^|\\G)(?!\\s*([`~]{3,})\\s*$)",
+          "contentName": "meta.embedded.block.julia",
+          "patterns": [{ "include": "#julia-code" }]
+        }
       ]
+    },
+    "nested-fenced-other": {
+      "begin": "(^|\\G)(\\s*)(`{3,}|~{3,})\\s*([^`\\s]+)[^`]*$",
+      "end": "(^|\\G)(\\2|\\s{0,3})(\\3)\\s*$",
+      "name": "embed.docstring.string.julia markup.fenced_code.block.markdown",
+      "beginCaptures": {
+        "3": { "name": "punctuation.definition.markdown" },
+        "4": { "name": "fenced_code.block.language.markdown" }
+      },
+      "endCaptures": {
+        "3": { "name": "punctuation.definition.markdown" }
+      }
     }
   }
 }

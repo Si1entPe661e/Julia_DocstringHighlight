@@ -1,22 +1,22 @@
 >"""
-#^^^ source.julia string.docstring.julia punctuation.definition.string.begin.julia
+#^^^ source.julia embed.docstring.julia string.docstring.julia punctuation.definition.string.begin.julia
 >```math
-#^^^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown punctuation.definition.markdown
-#   ^^^^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown fenced_code.block.language.markdown
+#^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia markup.fenced_code.block.markdown punctuation.definition.markdown
+#   ^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia markup.fenced_code.block.markdown fenced_code.block.language.markdown
 >\\alpha + f(x)
-#^^^^^^^^^^^^^^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown markup.raw.block.markdown
+#^^^^^^^^^^^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia markup.fenced_code.block.markdown
 >```
-#^^^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown punctuation.definition.markdown
+#^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia markup.fenced_code.block.markdown punctuation.definition.markdown
 >
 >```python
-#^^^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown punctuation.definition.markdown
-#   ^^^^^^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown fenced_code.block.language.markdown
+#^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia markup.fenced_code.block.markdown punctuation.definition.markdown
+#   ^^^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia markup.fenced_code.block.markdown fenced_code.block.language.markdown
 >print("x")
-#^^^^^^^^^^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown markup.raw.block.markdown
+#^^^^^^^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia markup.fenced_code.block.markdown
 >```
-#^^^ source.julia string.docstring.julia text.docstring.julia markup.fenced_code.block.markdown punctuation.definition.markdown
+#^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia markup.fenced_code.block.markdown punctuation.definition.markdown
 >"""
-#^^^ source.julia string.docstring.julia punctuation.definition.string.end.julia
+#^^^ source.julia embed.docstring.julia string.docstring.julia punctuation.definition.string.end.julia
 >fence_other(x) = x
 #^^^^^^^^^^^ source.julia entity.name.function.julia
 #           ^ source.julia meta.bracket.julia

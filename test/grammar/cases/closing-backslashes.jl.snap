@@ -1,10 +1,10 @@
 >"""
-#^^^ source.julia string.docstring.julia punctuation.definition.string.begin.julia
+#^^^ source.julia embed.docstring.julia string.docstring.julia punctuation.definition.string.begin.julia
 >The quotes after two backslashes close the docstring:
-#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.julia string.docstring.julia text.docstring.julia
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown
 >\\"""
-#^^ source.julia string.docstring.julia constant.character.escape.julia
-#  ^^^ source.julia string.docstring.julia punctuation.definition.string.end.julia
+#^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown constant.character.escape.julia
+#  ^^^ source.julia embed.docstring.julia string.docstring.julia punctuation.definition.string.end.julia
 >f(x) = x
 #^ source.julia entity.name.function.julia
 # ^ source.julia meta.bracket.julia
@@ -15,19 +15,19 @@
 #      ^^ source.julia
 >
 >"""
-#^^^ source.julia string.docstring.julia punctuation.definition.string.begin.julia
+#^^^ source.julia embed.docstring.julia string.docstring.julia punctuation.definition.string.begin.julia
 >The quotes after one or three backslashes are escaped: \"""
-#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.julia string.docstring.julia text.docstring.julia
-#                                                       ^^ source.julia string.docstring.julia text.docstring.julia constant.character.escape.julia
-#                                                         ^^ source.julia string.docstring.julia text.docstring.julia
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown
+#                                                       ^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown constant.character.escape.julia
+#                                                         ^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown
 >\\\""" and the docstring goes on; after four it closes:
-#^^ source.julia string.docstring.julia text.docstring.julia constant.character.escape.julia
-#  ^^ source.julia string.docstring.julia text.docstring.julia constant.character.escape.julia
-#    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.julia string.docstring.julia text.docstring.julia
+#^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown constant.character.escape.julia
+#  ^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown constant.character.escape.julia
+#    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown
 >\\\\"""
-#^^ source.julia string.docstring.julia constant.character.escape.julia
-#  ^^ source.julia string.docstring.julia constant.character.escape.julia
-#    ^^^ source.julia string.docstring.julia punctuation.definition.string.end.julia
+#^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown constant.character.escape.julia
+#  ^^ source.julia embed.docstring.julia text.html.markdown embed.docstring.string.julia meta.paragraph.markdown constant.character.escape.julia
+#    ^^^ source.julia embed.docstring.julia string.docstring.julia punctuation.definition.string.end.julia
 >g(x) = x
 #^ source.julia entity.name.function.julia
 # ^ source.julia meta.bracket.julia

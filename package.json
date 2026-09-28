@@ -42,6 +42,13 @@
         "embeddedLanguages": {
           "meta.embedded.block.julia": "julia"
         }
+      },
+      {
+        "scopeName": "markdown.julia.docstring.escapes",
+        "path": "./syntaxes/julia-docstring-escapes.injection.tmLanguage.json",
+        "injectTo": [
+          "source.julia"
+        ]
       }
     ],
     "colors": [

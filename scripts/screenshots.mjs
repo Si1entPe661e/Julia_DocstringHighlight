@@ -28,6 +28,8 @@ const THEMES = {
   'GitHub Dark Default': 'github.github-vscode-theme',
   'GitHub Light Default': 'github.github-vscode-theme',
   'Atom One Dark': 'akamud.vscode-theme-onedark',
+  'Catppuccin Macchiato': 'catppuccin.catppuccin-vsc',
+  'Tokyo Night Light': 'enkia.tokyo-night',
 };
 
 const outDir = path.resolve(root, arg('--out', 'images/themes'));
