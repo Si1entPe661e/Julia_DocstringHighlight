@@ -6,7 +6,7 @@
 // `julia` is not on PATH or the juliaup launcher cannot run. The integration tests run on the minimum
 // VS Code of engines.vscode and on VSCODE_TEST_STABLE (default: the current stable release); an
 // existing VSCODE_TEST_PATH is ignored so that both versions are really tested. The package is built
-// into the temp directory, not over the .vsix in the project root.
+// into the temp directory, not over the .vsix in vsix/.
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';

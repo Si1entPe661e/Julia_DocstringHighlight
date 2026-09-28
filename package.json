@@ -130,7 +130,7 @@
     "perf": "npm run compile-tests && node --expose-gc test/perf/run.mjs",
     "release-check": "node scripts/release-check.mjs",
     "update-test-grammars": "node scripts/update-test-grammars.mjs",
-    "package": "vsce package",
+    "package": "node -e \"require('fs').mkdirSync('vsix', { recursive: true })\" && vsce package --out vsix/",
     "vscode:prepublish": "npm run check-types && node esbuild.mjs --production"
   },
   "devDependencies": {

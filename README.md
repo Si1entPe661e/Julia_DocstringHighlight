@@ -102,7 +102,7 @@ npm run compile      # type-check and bundle to dist/extension.js
 npm test             # unit + grammar + integration tests
 npm run test:oracle  # cross-check the fixtures against the Julia parser (needs `julia`)
 npm run perf         # detector performance budget
-npm run package      # build the .vsix
+npm run package      # build the .vsix into vsix/
 npm run release-check  # all of the above, on the oldest supported and the stable VS Code, with the oracle required
 ```
 
