@@ -2,7 +2,7 @@
   "name": "julia-docstring-highlighter",
   "displayName": "Julia Docstring Highlighter",
   "description": "Subtle, theme-native highlighting for Julia docstrings: a light documentation region plus Markdown and Julia syntax inside.",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "publisher": "ZhichengLucianLi",
   "license": "MIT",
   "repository": {
