@@ -1,12 +1,18 @@
 // Integration tests in the Extension Host. Decorations cannot be read back through the API,
 // so the hidden command juliaDocstringHighlight.debug.getRegions reports what was applied.
 import * as assert from 'node:assert/strict';
+import * as fs from 'node:fs';
 import * as path from 'node:path';
 import * as vscode from 'vscode';
 import type { DebugEditorState } from '../../src/extension';
 import { FIXTURES, readExpected } from '../fixtureData';
 
-const EXTENSION_ID = 'lizhicheng.julia-docstring-highlighter';
+/** `publisher.name` from package.json (the tests run from out/test/…). */
+const manifest = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../../../package.json'), 'utf8')) as {
+  publisher: string;
+  name: string;
+};
+const EXTENSION_ID = `${manifest.publisher}.${manifest.name}`;
 const COMMAND = 'juliaDocstringHighlight.debug.getRegions';
 const SECTION = 'juliaDocstringHighlight';
 
